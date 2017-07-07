@@ -3,9 +3,8 @@ var enterGetCapabilitiesUrl = function (t) {
         title: 'WMS Preview',
         items: [
             {
-                text: 'Enter GetCapabilities URL',
-                callback: function (t) {
-                    return t.popup(
+                callback: function (t2) {
+                    return t2.popup(
                         {
                             title: "Estimation",
                             url: 'enter-getcapabilities-url.html'
