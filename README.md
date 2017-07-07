@@ -2,8 +2,4 @@
 
 Trello Power-Up to generate a card for every layer of a given Web Map Service (WMS)
 
-
-## references
-
-* Power-Up Tutorial http://tech.trello.com/power-up-tutorial-part-one/
-* Power-Up Samples https://github.com/trello/power-up-template
+Plugin hosted on Github. [Branch gh-pages](https://github.com/dnltsk/trello-wms-power-up/tree/gh-pages) is the main branch.
