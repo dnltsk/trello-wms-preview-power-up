@@ -1,23 +1,23 @@
 var enterGetCapabilitiesUrl = function (t) {
     console.log("enterGetCapabilitiesUrl", t);
-    return t.popup({
-        title: 'WMS Preview',
-        items: [
-            {
-                text: 'enter-getcapabilities-url.html',
-                callback: function (t) {
-                    console.log("enter-getcapabilities-url.html", t);
-                    return t.overlay({
-                        url: './enter-getcapabilities-url.html',
-                        args: {rand: (Math.random() * 100).toFixed(0)}
-                    }).then(function () {
-                        console.log("close??", t);
-                        return t.closePopup();
-                    });
-                }
-            }
-        ]
-    });
+    // return t.popup({
+    //     title: 'WMS Preview',
+    //     items: [
+    //         {
+    //             text: 'enter-getcapabilities-url.html',
+    //             callback: function (t) {
+    //                 console.log("enter-getcapabilities-url.html", t);
+    //                 return t.overlay({
+    //                     url: './enter-getcapabilities-url.html',
+    //                     args: {rand: (Math.random() * 100).toFixed(0)}
+    //                 }).then(function () {
+    //                     console.log("close??", t);
+    //                     return t.closePopup();
+    //                 });
+    //             }
+    //         }
+    //     ]
+    // });
 };
 
 TrelloPowerUp.initialize(
