@@ -3,13 +3,15 @@ var enterGetCapabilitiesUrl = function (t) {
         title: 'WMS Preview',
         items: [
             {
-                callback: function (t2) {
-                    return t2.popup(
-                        {
-                            title: "Estimation",
-                            url: 'enter-getcapabilities-url.html'
-                        }
-                    )
+                text: 'enter-getcapabilities-url.html',
+                callback: function(t){
+                    return t.overlay({
+                        url: './enter-getcapabilities-url.html',
+                        args: { rand: (Math.random() * 100).toFixed(0) }
+                    })
+                        .then(function(){
+                            return t.closePopup();
+                        });
                 }
             }
         ]
