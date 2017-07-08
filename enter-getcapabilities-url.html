@@ -5,17 +5,17 @@
 </head>
 <body>
 <form id="getCapabilitiesUrlForm">
-    <label for="getCapabilitiesUrl">WMS GetCapabilities URL A:</label>
+    <label for="getCapabilitiesUrl">WMS GetCapabilities URL B:</label>
     <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
 <script>
     var t = TrelloPowerUp.iframe();
 
-    window.estimate.addEventListener('submit', function (event) {
+    window.getCapabilitiesUrlForm.addEventListener('submit', function (event) {
         // Stop the browser trying to submit the form itself.
         event.preventDefault();
-        return t.set('card', 'shared', 'estimate', window.estimateSize.value)
+        return t.set('card', 'shared', 'getCapabiltiesUrl', window.getCapabilitiesUrl.value)
             .then(function () {
                 t.closePopup();
             });
