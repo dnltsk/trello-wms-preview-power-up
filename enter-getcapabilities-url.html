@@ -28,6 +28,7 @@
             dataType: "xml",
             success: function (gc) {
                 console.log("loaded data", gc);
+                console.log("loaded data", $(gc));
 
                 var xml = $.parseXML(gc);
                 console.log(xml);
