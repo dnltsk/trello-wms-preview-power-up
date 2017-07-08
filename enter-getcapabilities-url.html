@@ -25,12 +25,27 @@
                 url: url,
                 dataType: "xml",
                 success: function (gc) {
-                    console.log("loaded data", gc);
-                    console.log("loaded data", $(gc));
-                    console.log("loaded data", $('Name', gc).text());
+                    var names = $('Name', gc).text();
 
-                    var xml = $.parseXML(gc);
-                    console.log(xml);
+                     console.log("loaded data", names);
+
+
+//                    var success = function(successMsg) {
+//                        console.log(successMsg);
+//                        //Save to storage here
+//                    };
+//
+//                    var error = function(errorMsg) {
+//                        console.log(errorMsg);
+//                    };
+//
+//                    function AddCardToTrello() {
+//                        Trello.addCard({
+//                            url: currentLocation,
+//                            name: "{{ soproduct.product }}",
+//                            due: {{ soproduct.required_date|date:"SHORT_DATE_FORMAT"  }}
+//                    }, success, error);
+//                    }
 
                     t.closePopup();
                 },
