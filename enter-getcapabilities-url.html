@@ -24,39 +24,38 @@
             //var gc = $.parseXML(url);
             //console.log('gc', gc);
 
-//        $.ajax({
-//            url: url,
-//            type: "GET",
-//            dataType: "xml",
-//            success: function (gc) {
-//                console.log("loaded data", gc);
-//                console.log("loaded data", $(gc));
-//                console.log("loaded data", $('Name', gc));
-//
-//                var xml = $.parseXML(gc);
-//                console.log(xml);
-//
-//                t.closePopup();
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.error('error in getCapabilities loading', url);
-//                t.closePopup();
-//            }
-//        });
+        $.ajax({
+            url: url,
+            dataType: "xml",
+            success: function (gc) {
+                console.log("loaded data", gc);
+                console.log("loaded data", $(gc));
+                console.log("loaded data", $('Name', gc));
 
-            $.ajax({
-                url: url,
-                dataType: 'xml',
-                success: function (data) {
-                    console.log('data', data);
-                    console.log('data', $(data));
-                    // Extract relevant data from XML
-                    var xml_node = $('Pages', data);
-                    console.log(xml_node.find('Page[Name="test"] > controls > test').text());
-                },
-                error: function (data) {
-                    console.log('Error loading XML data');
-                }
+                var xml = $.parseXML(gc);
+                console.log(xml);
+
+                t.closePopup();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', url);
+                t.closePopup();
+            }
+        });
+
+//            $.ajax({
+//                url: url,
+//                dataType: 'xml',
+//                success: function (data) {
+//                    console.log('data', data);
+//                    console.log('data', $(data));
+//                    // Extract relevant data from XML
+//                    var xml_node = $('Pages', data);
+//                    console.log(xml_node.find('Page[Name="test"] > controls > test').text());
+//                },
+//                error: function (data) {
+//                    console.log('Error loading XML data');
+//                }
             });
 
 
