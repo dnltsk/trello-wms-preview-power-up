@@ -27,7 +27,9 @@
                 success: function (gc) {
                     var names = $('Name', gc).text();
 
-                     console.log("loaded data", names);
+                    names.forEach(function (name) {
+                        console.log("name", name);
+                    })
 
 
 //                    var success = function(successMsg) {
