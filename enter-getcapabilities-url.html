@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL G:</label>
+    <label for="url">WMS GetCapabilities URL H:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -17,20 +17,25 @@
         event.preventDefault();
         var url = window.url.value;
         console.log('url', url);
+        // TODO: validate https; validate 1.3.0
 
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "xml",
-            success: function (data) {
-                console.log("loaded data", data);
-                t.closePopup();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', url);
-                t.closePopup();
-            }
-        });
+        var gc = $.parseXML(url);
+        console.log('gc', gc);
+
+//        $.ajax({
+//            url: url,
+//            type: "GET",
+//            dataType: "xml",
+//            success: function (gc) {
+//                console.log("loaded data", data);
+//                $(gc).find()
+//                t.closePopup();
+//            },
+//            error: function (jqXHR, textStatus, errorThrown) {
+//                console.error('error in getCapabilities loading', url);
+//                t.closePopup();
+//            }
+//        });
 
 
     });
