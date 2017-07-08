@@ -26,9 +26,9 @@
                 dataType: "xml",
                 success: function (gc) {
                     var names = $('Name', gc);
-
+                    console.log("names", names);
                     names.forEach(function (name) {
-                        console.log("name", name);
+                        console.log("name", name.text());
                     });
 
 
