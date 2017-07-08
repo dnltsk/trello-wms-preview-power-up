@@ -27,7 +27,7 @@
                 success: function (gc) {
                     var names = $('Name', gc);
                     console.log("names", names);
-                    names.forEach(function (name) {
+                    names.map(function (name) {
                         console.log("name", name.text());
                     });
 
