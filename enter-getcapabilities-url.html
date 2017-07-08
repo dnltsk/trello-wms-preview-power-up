@@ -27,7 +27,7 @@
                 success: function (gc) {
                     console.log("loaded data", gc);
                     console.log("loaded data", $(gc));
-                    console.log("loaded data", $('Name', gc).value);
+                    console.log("loaded data", $('Name', gc).text());
 
                     var xml = $.parseXML(gc);
                     console.log(xml);
