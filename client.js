@@ -4,17 +4,17 @@ var enterGetCapabilitiesUrl = function (t) {
         title: 'WMS Preview',
         items: [
             {
-                text: 'enter-getcapabilities-url.html',
-                callback: function (t) {
-                    console.log("enter-getcapabilities-url.html", t);
-                    return t.overlay({
-                        url: './enter-getcapabilities-url.html',
-                        args: {rand: (Math.random() * 100).toFixed(0)}
-                    }).then(function () {
-                        console.log("close??", t);
-                        return t.closePopup();
-                    });
-                }
+                url: 'enter-getcapabilities-url.html'
+                // text: 'enter-getcapabilities-url.html',
+                // callback: function (t) {
+                //     console.log("enter-getcapabilities-url.html", t);
+                //     return t.overlay({
+                //         url: './enter-getcapabilities-url.html'
+                //     }).then(function () {
+                //         console.log("close??", t);
+                //         return t.closePopup();
+                //     });
+                // }
             }
         ]
     });
