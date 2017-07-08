@@ -39,26 +39,36 @@
 
     });
 
-    function createWmsLayerPreviewCard(layerName){
+    function createWmsLayerPreviewCard(layerName) {
         var destinationList = "YA902M72";
 
-        var success = function(successMsg) {
+        var success = function (successMsg) {
             asyncOutput(successMsg);
         };
 
-        var error = function(errorMsg) {
+        var error = function (errorMsg) {
             asyncOutput(errorMsg);
         };
 
-        var newCard =
-            {name: layerName,
-                desc: "Using the Trello API is fun and easy!",
-                pos: "top",
-                due: null,
-                idList: destinationList
-            };
+        var newCard = {
+            name: layerName,
+            desc: "Using the Trello API is fun and easy!",
+            pos: "top",
+            due: null,
+            idList: destinationList
+        };
 
-        Trello.post('/cards/', newCard, success, error);
+        $.ajax({
+            url: '/cards/',
+            type: "POST",
+            data: newCard,
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (error) {
+                console.error("cannot create card", error);
+            }
+        });
     }
 
 
