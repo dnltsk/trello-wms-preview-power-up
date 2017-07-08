@@ -1,18 +1,12 @@
 var enterGetCapabilitiesUrl = function (t) {
     console.log("enterGetCapabilitiesUrl", t);
     return t.popup({
-        title: 'WMS Preview',
-                url: 'enter-getcapabilities-url.html'
-                // text: 'enter-getcapabilities-url.html',
-                // callback: function (t) {
-                //     console.log("enter-getcapabilities-url.html", t);
-                //     return t.overlay({
-                //         url: './enter-getcapabilities-url.html'
-                //     }).then(function () {
-                //         console.log("close??", t);
-                //         return t.closePopup();
-                //     });
-                // }
+        title: 'WMS Preview A',
+        url: 'enter-getcapabilities-url.html',
+        callback: function (t) {
+            console.log("close??", t);
+            return t.closePopup();
+        }
     });
 };
 
