@@ -59,7 +59,7 @@
         };
 
         $.ajax({
-            url: 'https://trello.com/cards/',
+            url: 'https://trello.com/v1/cards',
             type: "POST",
             data: newCard,
             success: function (data) {
