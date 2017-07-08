@@ -13,37 +13,54 @@
 <script>
     var t = TrelloPowerUp.iframe();
 
-    window.urlForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var url = window.url.value;
-        console.log('url', url);
-        // TODO: validate https; validate 1.3.0
+    var xmlContent =
 
-        //var gc = $.parseXML(url);
-        //console.log('gc', gc);
+        window.urlForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var url = window.url.value;
+            console.log('url', url);
+            // TODO: validate https; validate 1.3.0
 
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "xml",
-            success: function (gc) {
-                console.log("loaded data", gc);
-                console.log("loaded data", $(gc));
-                console.log("loaded data", $('Name', gc));
+            //var gc = $.parseXML(url);
+            //console.log('gc', gc);
 
-                var xml = $.parseXML(gc);
-                console.log(xml);
+//        $.ajax({
+//            url: url,
+//            type: "GET",
+//            dataType: "xml",
+//            success: function (gc) {
+//                console.log("loaded data", gc);
+//                console.log("loaded data", $(gc));
+//                console.log("loaded data", $('Name', gc));
+//
+//                var xml = $.parseXML(gc);
+//                console.log(xml);
+//
+//                t.closePopup();
+//            },
+//            error: function (jqXHR, textStatus, errorThrown) {
+//                console.error('error in getCapabilities loading', url);
+//                t.closePopup();
+//            }
+//        });
 
-                t.closePopup();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', url);
-                t.closePopup();
-            }
+            $.ajax({
+                url: url,
+                dataType: 'xml',
+                success: function (data) {
+                    console.log('data', data);
+                    console.log('data', $(data));
+                    // Extract relevant data from XML
+                    var xml_node = $('Pages', data);
+                    console.log(xml_node.find('Page[Name="test"] > controls > test').text());
+                },
+                error: function (data) {
+                    console.log('Error loading XML data');
+                }
+            });
+
+
         });
-
-
-    });
 
 
 </script>
