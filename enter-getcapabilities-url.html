@@ -19,23 +19,26 @@
         console.log('url', url);
         // TODO: validate https; validate 1.3.0
 
-        var gc = $.parseXML(url);
-        console.log('gc', gc);
+        //var gc = $.parseXML(url);
+        //console.log('gc', gc);
 
-//        $.ajax({
-//            url: url,
-//            type: "GET",
-//            dataType: "xml",
-//            success: function (gc) {
-//                console.log("loaded data", data);
-//                $(gc).find()
-//                t.closePopup();
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.error('error in getCapabilities loading', url);
-//                t.closePopup();
-//            }
-//        });
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "xml",
+            success: function (gc) {
+                console.log("loaded data", data);
+
+                var xml = $.parseXML(data);
+                console.log(xml);
+
+                t.closePopup();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', url);
+                t.closePopup();
+            }
+        });
 
 
     });
