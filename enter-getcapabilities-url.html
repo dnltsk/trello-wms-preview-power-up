@@ -25,11 +25,11 @@
                 url: url,
                 dataType: "xml",
                 success: function (gc) {
-                    var names = $('Name', gc).text();
+                    var names = $('Name', gc);
 
                     names.forEach(function (name) {
                         console.log("name", name);
-                    })
+                    });
 
 
 //                    var success = function(successMsg) {
