@@ -27,9 +27,9 @@
             type: "GET",
             dataType: "xml",
             success: function (gc) {
-                console.log("loaded data", data);
+                console.log("loaded data", gc);
 
-                var xml = $.parseXML(data);
+                var xml = $.parseXML(gc);
                 console.log(xml);
 
                 t.closePopup();
