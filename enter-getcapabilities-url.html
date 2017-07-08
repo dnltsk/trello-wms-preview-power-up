@@ -16,8 +16,25 @@
         event.preventDefault();
         var url = window.url.value;
         console.log('url', url);
-        t.closePopup();
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "xml",
+            success: function (data) {
+                console.log(data);
+                t.closePopup();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', url);
+                t.closePopup();
+            }
+        });
+
+
     });
+
+
 </script>
 </body>
 </html>
