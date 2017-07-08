@@ -29,6 +29,7 @@
             success: function (gc) {
                 console.log("loaded data", gc);
                 console.log("loaded data", $(gc));
+                console.log("loaded data", $('Name', gc));
 
                 var xml = $.parseXML(gc);
                 console.log(xml);
