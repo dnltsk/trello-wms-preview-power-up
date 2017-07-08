@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<WMS_Capabilities xmlns="http://www.opengis.net/wms" xmlns:sld="http://www.opengis.net/sld" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3.0" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd">
+<Service>
+  <Name>WMS</Name>
+  <Title>OSM-WMS Uni Heidelberg</Title>
+  <Abstract>Cached WMS with OpenStreetMap Data</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://osm-wms.de"/>
+  <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>Michael Auer</ContactPerson>
+        <ContactOrganization>University of Heidelberg, Department of Geography, Chair of GIScience Prof. Zipf</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Reseach Assistant</ContactPosition>
+      <ContactAddress>
+        <AddressType>postal</AddressType>
+        <Address>Berlinerstr. 48</Address>
+        <City>Heidelberg</City>
+        <StateOrProvince></StateOrProvince>
+        <PostCode>69120</PostCode>
+        <Country>Germany</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone></ContactVoiceTelephone>
+      <ContactFacsimileTelephone></ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>auer@uni-heidelberg.de</ContactElectronicMailAddress>
+  </ContactInformation>
+    <Fees>None</Fees>
+    <AccessConstraints>This service is intended for private and evaluation use only. Map data © OpenStreetMap contributors, CC BY-SA The data is licensed as Creative Commons Attribution-Share Alike 2.0 (http://creativecommons.org/licenses/by-sa/2.0/)</AccessConstraints>
+</Service>
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://129.206.228.72/cached/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/gif</Format>
+      <Format>image/GeoTIFF</Format>
+      <Format>image/tiff</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://129.206.228.72/cached/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/plain</Format>
+      <Format>text/html</Format>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://129.206.228.72/cached/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+  </Request>
+  <Exception>
+    <Format>XML</Format>
+    <Format>INIMAGE</Format>
+    <Format>BLANK</Format>
+  </Exception>
+  <Layer queryable="1">
+    <Title>OSM-WMS Uni Heidelberg</Title>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:900913</CRS>
+    <CRS>EPSG:3857</CRS>
+    <CRS>EPSG:31466</CRS>
+    <CRS>EPSG:31467</CRS>
+    <CRS>EPSG:31468</CRS>
+    <CRS>EPSG:31469</CRS>
+    <CRS>EPSG:32632</CRS>
+    <CRS>EPSG:32633</CRS>
+    <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.0511287798</southBoundLatitude>
+      <northBoundLatitude>85.0511287798</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798" maxx="180" maxy="85.0511287798" />
+    <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+    <BoundingBox CRS="EPSG:4326" minx="-85.0511287798" miny="-180.0" maxx="85.0511287798" maxy="180.0" />
+    <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+    <Layer queryable="1">
+      <Name>osm_auto:all</Name>
+      <Title>OSM WMS - osm-wms.de</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-85.0511287798</southBoundLatitude>
+        <northBoundLatitude>85.0511287798</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798" maxx="180" maxy="85.0511287798" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+      <BoundingBox CRS="EPSG:4326" minx="-85.0511287798" miny="-180.0" maxx="85.0511287798" maxy="180.0" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+    </Layer>
+    <Layer>
+      <Name>europe_wms:hs_srtm_europa</Name>
+      <Title>HILLSHADE WMS - osm-wms.de</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-10</westBoundLongitude>
+        <eastBoundLongitude>30</eastBoundLongitude>
+        <southBoundLatitude>35</southBoundLatitude>
+        <northBoundLatitude>60</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-10" miny="35" maxx="30" maxy="60" />
+      <BoundingBox CRS="EPSG:900913" minx="-1113194.90793" miny="4163881.14406" maxx="3339584.7238" maxy="8399737.88982" />
+      <BoundingBox CRS="EPSG:4326" minx="35" miny="-10" maxx="60" maxy="30" />
+      <BoundingBox CRS="EPSG:3857" minx="-1113194.90793" miny="4163881.14406" maxx="3339584.7238" maxy="8399737.88982" />
+    </Layer>
+    <Layer queryable="1">
+      <Name>osm_auto:histosm2_temp</Name>
+      <Title>HistOSM - histosm.org</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-85.0511287798</southBoundLatitude>
+        <northBoundLatitude>85.0511287798</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798" maxx="180" maxy="85.0511287798" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+      <BoundingBox CRS="EPSG:4326" minx="-85.0511287798" miny="-180.0" maxx="85.0511287798" maxy="180.0" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+    </Layer>
+    <Layer queryable="1">
+      <Name>osm_auto:osm_lulc</Name>
+      <Title>OSM Landuse - Landcover</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-85.0511287798</southBoundLatitude>
+        <northBoundLatitude>85.0511287798</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798" maxx="180" maxy="85.0511287798" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+      <BoundingBox CRS="EPSG:4326" minx="-85.0511287798" miny="-180.0" maxx="85.0511287798" maxy="180.0" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-20037508.3428" maxx="20037508.3428" maxy="20037508.3428" />
+    </Layer>
+  </Layer>
+</Capability>
+</WMS_Capabilities>
