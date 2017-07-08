@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL F:</label>
+    <label for="url">WMS GetCapabilities URL G:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -23,7 +23,7 @@
             type: "GET",
             dataType: "xml",
             success: function (data) {
-                console.log(data);
+                console.log("loaded data", data);
                 t.closePopup();
             },
             error: function (jqXHR, textStatus, errorThrown) {
