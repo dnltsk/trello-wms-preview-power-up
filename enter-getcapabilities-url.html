@@ -14,6 +14,8 @@
     var t = TrelloPowerUp.iframe();
 
     console.log('t', t);
+    console.log('t.io.hostHandlers', t.io.hostHandlers);
+    console.log('t.io.hostHandlers.cards', t.io.hostHandlers.cards());
 
     createWmsLayerPreviewCard("foo");
 
@@ -56,7 +58,7 @@
         $.ajax({
             url: 'https://api.trello.com/1/cards' +
             '?key=1a674bbe510eca060f24943e358b76ca' +
-            //'&token=abb6eba99728aab8bb27f98e2ee2217b6c271b198d9016a9e7f66986bd154997' +
+            '&token=abb6eba99728aab8bb27f98e2ee2217b6c271b198d9016a9e7f66986bd154997' +
             '&name='+layerName +
             '&desc=newCarddescription' +
             '&idList='+destinationList,
