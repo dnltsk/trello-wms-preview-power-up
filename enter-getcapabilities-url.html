@@ -14,10 +14,8 @@
     var t = TrelloPowerUp.iframe();
 
     console.log('t', t);
-    console.log('t.board', t.board());
-    console.log('t.card', t.card());
-    console.log('t.post', t.post());
-    console.log('t.attachment', t.attachment());
+
+    createWmsLayerPreviewCard("foo");
 
     window.urlForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -25,23 +23,22 @@
         console.log('url', url);
         // TODO: validate https; validate 1.3.0
 
-        $.ajax({
-            url: url,
-            dataType: "xml",
-            success: function (gc) {
-                $(gc).find('Layer').each(function () {
-                    var name = $(this).find("Name").text();
-                    console.log(name);
-                    createWmsLayerPreviewCard(name);
-                });
-
-                t.closePopup();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', url);
-                t.closePopup();
-            }
-        });
+//        $.ajax({
+//            url: url,
+//            dataType: "xml",
+//            success: function (gc) {
+//                $(gc).find('Layer').each(function () {
+//                    var name = $(this).find("Name").text();
+//                    console.log(name);
+//                });
+//
+//                t.closePopup();
+//            },
+//            error: function (jqXHR, textStatus, errorThrown) {
+//                console.error('error in getCapabilities loading', url);
+//                t.closePopup();
+//            }
+//        });
 
     });
 
