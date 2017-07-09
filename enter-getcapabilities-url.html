@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL K:</label>
+    <label for="url">WMS GetCapabilities URL L:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -66,7 +66,7 @@
             type: "POST",
             data: newCard,
             success: function (data) {
-                console.log(data)
+                console.log("success create card", data);
             },
             error: function (error) {
                 console.error("cannot create card", error);
