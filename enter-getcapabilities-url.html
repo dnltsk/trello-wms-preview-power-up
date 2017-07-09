@@ -64,6 +64,7 @@
             },
             error: function (error) {
                 console.error("cannot create card", error);
+                window.exx = error;
             }
         });
     }
