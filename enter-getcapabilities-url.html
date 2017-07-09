@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL I:</label>
+    <label for="url">WMS GetCapabilities URL J:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -16,6 +16,7 @@
     console.log('t', t);
     console.log('t.board', t.board());
     console.log('t.card', t.card());
+    console.log('t.post', t.post());
     console.log('t.attachment', t.attachment());
 
     window.urlForm.addEventListener('submit', function (event) {
