@@ -14,9 +14,9 @@
     var t = TrelloPowerUp.iframe();
 
     console.log('t', t);
-    console.log('t.board', t.board);
-    console.log('t.card', t.card);
-    console.log('t.attachment', t.attachment);
+    console.log('t.board', t.board());
+    console.log('t.card', t.card());
+    console.log('t.attachment', t.attachment());
 
     window.urlForm.addEventListener('submit', function (event) {
         event.preventDefault();
