@@ -26,8 +26,6 @@
         // TODO: validate https; validate 1.3.0
 
 
-        //createWmsLayerPreviewCard("foo");
-
         $.ajax({
             url: url,
             dataType: "xml",
@@ -104,7 +102,7 @@
                 pos: 'bottom'
             };
             Trello.post(
-                'boards/' + BOARD_ID + '/cards/',
+                '/cards/',
                 newCard,
                 function (data) {
                     console.log('Card created successfully. Data returned:' + JSON.stringify(data));
