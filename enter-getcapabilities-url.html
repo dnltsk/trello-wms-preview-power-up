@@ -23,14 +23,16 @@
     const TOKEN = t.secret;
 
     authorizeTrelloUser();
-    //createWmsList("foo");
-    //createWmsLayerPreviewCard("foo");
 
     window.urlForm.addEventListener('submit', function (event) {
         event.preventDefault();
         var url = window.url.value;
         console.log('url', url);
         // TODO: validate https; validate 1.3.0
+
+
+        createWmsList("foo");
+        //createWmsLayerPreviewCard("foo");
 
 //        $.ajax({
 //            url: url,
@@ -51,37 +53,35 @@
 
     });
 
-    function authorizeTrelloUser(){
+    function authorizeTrelloUser() {
         Trello.authorize({
             type: 'popup',
             name: 'Getting Started Application',
             scope: {
                 read: 'true',
-                write: 'true' },
+                write: 'true'
+            },
             expiration: 'never',
-            success: function() { console.log('Successful authentication'); },
-            error: function() { console.log('Failed authentication'); }
+            success: function () {
+                console.log('Successful authentication');
+            },
+            error: function () {
+                console.log('Failed authentication');
+            }
         });
     }
 
     function createWmsList(listName) {
-
-
-
-        $.ajax({
-            url: 'https://api.trello.com/1/boards/' + BOARD_ID + '/lists' +
-            '?key=1a674bbe510eca060f24943e358b76ca' +
-            '&token=' + TOKEN +
-            '&name=' + listName,
-            type: "POST",
-            success: function (data) {
-                console.log("success create list", data);
-            },
-            error: function (error) {
-                console.error("cannot create list", error);
-                window.exx = error;
-            }
-        });
+        var newCard = {
+            name: listName,
+            pos: 'top'
+        };
+        Trello.post(
+            '/lists/',
+            newCard,
+            function (data) {
+                console.log('List created successfully. Data returned:' + JSON.stringify(data));
+            });
     }
 
     function createWmsLayerPreviewCard(layerName) {
