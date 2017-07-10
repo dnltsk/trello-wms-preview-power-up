@@ -7,7 +7,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL A:</label>
+    <label for="url">WMS GetCapabilities URL B:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -134,7 +134,7 @@
 
     function createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer) {
         var newAttachment = {
-            url: createGetMapUrl(wmsCapabilities, layer),
+            url: createGetLegendGraphicUrl(wmsCapabilities, layer),
             name: 'GetLegendGraphic'
         };
         Trello.post(
