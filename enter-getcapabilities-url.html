@@ -7,7 +7,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL A:</label>
+    <label for="url">WMS GetCapabilities URL B:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -39,7 +39,7 @@
                 };
 
                 var layers = [];
-                $(gc).find('Layer').each(function () {
+                $(gc).find('Layer Layer').each(function () {
                     layers.push({
                         'name': $(this).find("Name").text(),
                         'title': $(this).find("Title").text()
