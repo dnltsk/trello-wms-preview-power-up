@@ -123,7 +123,7 @@
             name: 'GetMap - World'
         };
         Trello.post(
-            '/cards/'+idCard+'/attachment',
+            '/cards/'+idCard+'/attachments',
             newAttachment,
             function (data) {
                 console.log('GetMap created successfully. Data returned:' + JSON.stringify(data));
