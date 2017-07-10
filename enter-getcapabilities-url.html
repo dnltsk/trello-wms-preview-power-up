@@ -7,7 +7,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL C:</label>
+    <label for="url">WMS GetCapabilities URL D:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -109,6 +109,24 @@
                     console.log('Card created successfully. Data returned:' + JSON.stringify(data));
                 });
         });
+    }
+
+    function createWmsAttachments(idCard, wmsCapabilities, layer) {
+        createGetMapAttachment(idCard, wmsCapabilities, layer);
+        //createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
+    }
+
+    function createGetMapAttachment(idCard, wmsCapabilities, layer){
+        var newAttachment = {
+            url: 'http://129.206.228.72/cached/osm/service?service=wms&version=1.1.1&request=getmap&layers='+layer.name+'&styles=&srs=EPSG:4326&bbox=-180,-90,180,90&width=1024&height=512&format=image/png',
+            name: 'GetMap - World'
+        };
+        Trello.post(
+            '/cards/'+idCard+'/attachment',
+            newAttachment,
+            function (data) {
+                console.log('GetMap created successfully. Data returned:' + JSON.stringify(data));
+            });
     }
 
 
