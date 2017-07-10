@@ -2,11 +2,12 @@
 <head>
     <link rel="stylesheet" href="https://trello.com/power-ups/power-up.css">
     <script src="https://trello.com/power-ups/power-up.min.js"></script>
+    <script src="https://api.trello.com/1/client.js?key=1a674bbe510eca060f24943e358b76ca"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL D:</label>
+    <label for="url">WMS GetCapabilities URL A:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -16,13 +17,15 @@
     console.log('t', t);
     console.log('t.io.hostHandlers', t.io.hostHandlers);
 
+    console.log('Trello', Trello);
+
     const BOARD_ID = t.args[0].context.board;
-    const TOKEN = t.secret;
+    const SECRET = t.secret;
 
     createWmsList("foo");
 
 
-    createWmsLayerPreviewCard("foo");
+    //createWmsLayerPreviewCard("foo");
 
     window.urlForm.addEventListener('submit', function (event) {
         event.preventDefault();
