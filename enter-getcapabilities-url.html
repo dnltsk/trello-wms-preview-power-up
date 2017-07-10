@@ -101,7 +101,7 @@
                 desc: function () {
                     return [
                         JSON.stringify(layer),
-                        'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer)
+                        'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer),
                         'GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer)
                     ].join('\n\n');
                 },
@@ -113,19 +113,14 @@
                 newCard,
                 function (data) {
                     console.log('Card created successfully. Data returned:' + JSON.stringify(data));
-                    createWmsAttachments(data.id, wmsCapabilities, layer);
+                    createGetMapAttachment(data.id, wmsCapabilities, layer);
                 });
         });
     }
 
-    function createWmsAttachments(idCard, wmsCapabilities, layer) {
-        createGetMapAttachment(idCard, wmsCapabilities, layer);
-        //createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
-    }
-
     function createGetMapAttachment(idCard, wmsCapabilities, layer) {
         var newAttachment = {
-            url:,
+            url: createGetMapUrl(wmsCapabilities, layer),
             name: 'GetMap - World'
         };
         Trello.post(
@@ -133,6 +128,21 @@
             newAttachment,
             function (data) {
                 console.log('GetMap created successfully. Data returned:' + JSON.stringify(data));
+                createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
+            });
+    }
+
+    function createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer) {
+        var newAttachment = {
+            url: createGetMapUrl(wmsCapabilities, layer),
+            name: 'GetLegendGraphic'
+        };
+        Trello.post(
+            '/cards/' + idCard + '/attachments',
+            newAttachment,
+            function (data) {
+                console.log('GetLegendGraphic created successfully. Data returned:' + JSON.stringify(data));
+                createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
             });
     }
 
@@ -140,7 +150,7 @@
         return 'http://129.206.228.72/cached/osm/service?service=wms&version=1.1.1&request=GetMap&layers=' + layer.name + '&styles=&srs=EPSG:4326&bbox=-180,-90,180,90&width=1024&height=512&format=image/png'
     }
     function createGetLegendGraphicUrl(wmsCapabilities, layer) {
-        return 'http://129.206.228.72/cached/osm/service?service=wms&version=1.1.1&request=GetLegendGraphic&layers=' + layer.name + '&styles=&srs=EPSG:4326&bbox=-180,-90,180,90&width=1024&height=512&format=image/png'
+        return 'http://129.206.228.72/cached/osm/service?service=wms&version=1.1.1&request=GetLegendGraphic&layer=' + layer.name + '&format=image/png'
     }
 
 </script>
