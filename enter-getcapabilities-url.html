@@ -72,13 +72,13 @@
     }
 
     function createWmsList(listName) {
-        var newCard = {
+        var newList = {
             name: listName,
             pos: 'top'
         };
         Trello.post(
-            '/lists/',
-            newCard,
+            'boards/'+BOARD_ID+'/lists/',
+            newList,
             function (data) {
                 console.log('List created successfully. Data returned:' + JSON.stringify(data));
             });
