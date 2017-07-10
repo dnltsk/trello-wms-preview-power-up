@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL C:</label>
+    <label for="url">WMS GetCapabilities URL D:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -17,6 +17,7 @@
     console.log('t.io.hostHandlers', t.io.hostHandlers);
 
     const BOARD_ID = t.args[0].context.board;
+    const TOKEN = t.secret;
 
     createWmsList("foo");
 
@@ -48,12 +49,12 @@
 
     });
 
-    function createWmsList(listName){
+    function createWmsList(listName) {
         $.ajax({
-            url: 'https://api.trello.com/1/boards/'+BOARD_ID+'/lists' +
+            url: 'https://api.trello.com/1/boards/' + BOARD_ID + '/lists' +
             '?key=1a674bbe510eca060f24943e358b76ca' +
-            '&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
-            '&name='+listName,
+            '&token=' + TOKEN +
+            '&name=' + listName,
             type: "POST",
             success: function (data) {
                 console.log("success create list", data);
@@ -80,10 +81,10 @@
         $.ajax({
             url: 'https://api.trello.com/1/cards' +
             '?key=1a674bbe510eca060f24943e358b76ca' +
-                //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
-            '&name='+layerName +
+            //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
+            '&name=' + layerName +
             '&desc=newCarddescription' +
-            '&idList='+destinationList,
+            '&idList=' + destinationList,
             type: "POST",
             data: newCard,
             success: function (data) {
