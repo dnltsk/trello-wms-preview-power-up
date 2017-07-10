@@ -6,7 +6,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL L:</label>
+    <label for="url">WMS GetCapabilities URL A:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -15,6 +15,11 @@
 
     console.log('t', t);
     console.log('t.io.hostHandlers', t.io.hostHandlers);
+
+    const BOARD_ID = t.args[0].context.board;
+
+    createWmsList("foo");
+
 
     createWmsLayerPreviewCard("foo");
 
@@ -43,6 +48,24 @@
 
     });
 
+    function createWmsList(listName){
+        $.ajax({
+            url: 'https://api.trello.com/1/boards/'+BOARD_ID+'/lists' +
+            '?key=1a674bbe510eca060f24943e358b76ca' +
+            //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
+            '&name='+listName,
+            type: "POST",
+            data: newCard,
+            success: function (data) {
+                console.log("success create list", data);
+            },
+            error: function (error) {
+                console.error("cannot create list", error);
+                window.exx = error;
+            }
+        });
+    }
+
     function createWmsLayerPreviewCard(layerName) {
         //var destinationList = "YA902M72";
         var destinationList = "bar";
@@ -58,7 +81,7 @@
         $.ajax({
             url: 'https://api.trello.com/1/cards' +
             '?key=1a674bbe510eca060f24943e358b76ca' +
-            //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
+                //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
             '&name='+layerName +
             '&desc=newCarddescription' +
             '&idList='+destinationList,
