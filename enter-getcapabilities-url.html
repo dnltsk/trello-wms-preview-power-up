@@ -7,17 +7,12 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL D:</label>
+    <label for="url">WMS GetCapabilities URL A:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
 <script>
     var t = TrelloPowerUp.iframe();
-
-    console.log('t', t);
-    console.log('t.io.hostHandlers', t.io.hostHandlers);
-
-    console.log('Trello', Trello);
 
     const BOARD_ID = t.args[0].context.board;
     const TOKEN = t.secret;
@@ -31,25 +26,39 @@
         // TODO: validate https; validate 1.3.0
 
 
-        createWmsList("foo");
         //createWmsLayerPreviewCard("foo");
 
-//        $.ajax({
-//            url: url,
-//            dataType: "xml",
-//            success: function (gc) {
-//                $(gc).find('Layer').each(function () {
-//                    var name = $(this).find("Name").text();
-//                    console.log(name);
-//                });
-//
-//                t.closePopup();
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.error('error in getCapabilities loading', url);
-//                t.closePopup();
-//            }
-//        });
+        $.ajax({
+            url: url,
+            dataType: "xml",
+            success: function (gc) {
+
+                var wmsCapabilities = {
+                    'service': {
+                        'name': $(gc).find('Service').find('Name').text(),
+                        'title': $(gc).find('Service').find('Title').text()
+                    }
+                };
+
+                var layers = [];
+                $(gc).find('Layer').each(function () {
+                    layers.push({
+                        'name': $(this).find("Name").text(),
+                        'title': $(this).find("Title").text()
+                    })
+                });
+
+                wmsCapabilities.layers = layers;
+
+                createWmsList(wmsCapabilities);
+
+                //t.closePopup();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', url);
+                t.closePopup();
+            }
+        });
 
     });
 
@@ -71,47 +80,35 @@
         });
     }
 
-    function createWmsList(listName) {
+    function createWmsList(wmsCapabilities) {
         var newList = {
-            name: listName,
+            name: wmsCapabilities.service.name + ' - ' + wmsCapabilities.service.title,
             pos: 'top'
         };
         Trello.post(
-            'boards/'+BOARD_ID+'/lists/',
+            'boards/' + BOARD_ID + '/lists/',
             newList,
             function (data) {
-                console.log('List created successfully. Data returned:' + JSON.stringify(data));
+                console.log('List created successfully. Data returned:' + JSON.stringify());
+                var idList = data.id;
+                createWmsCards(idList, wmsCapabilities);
             });
     }
 
-    function createWmsLayerPreviewCard(layerName) {
-        //var destinationList = "YA902M72";
-        var destinationList = "bar";
-
-        var newCard = {
-            name: layerName,
-            desc: "Using the Trello API is fun and easy!",
-            pos: "top",
-            due: null,
-            idList: destinationList
-        };
-
-        $.ajax({
-            url: 'https://api.trello.com/1/cards' +
-            '?key=1a674bbe510eca060f24943e358b76ca' +
-            //'&token=jwgAQ7Kp44NcuiJ17xJ8w3xqSZ8BR6NDXn5eR0AFMOVf9sz9aUDfxCOCf16vkMkz' +
-            '&name=' + layerName +
-            '&desc=newCarddescription' +
-            '&idList=' + destinationList,
-            type: "POST",
-            data: newCard,
-            success: function (data) {
-                console.log("success create card", data);
-            },
-            error: function (error) {
-                console.error("cannot create card", error);
-                window.exx = error;
-            }
+    function createWmsCards(idList, wmsCapabilities) {
+        wmsCapabilities.layers.forEach(function (layer) {
+            var newCard = {
+                name: layer.name + ' - ' + layer.title,
+                desc: JSON.stringify(layer),
+                idList: idList,
+                pos: 'bottom'
+            };
+            Trello.post(
+                'boards/' + BOARD_ID + '/cards/',
+                newCard,
+                function (data) {
+                    console.log('Card created successfully. Data returned:' + JSON.stringify(data));
+                });
         });
     }
 
