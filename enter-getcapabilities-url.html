@@ -7,7 +7,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL B:</label>
+    <label for="url">WMS GetCapabilities URL C:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -80,11 +80,12 @@
 
     function createWmsList(wmsCapabilities) {
         var newList = {
+            idBoard: BOARD_ID,
             name: wmsCapabilities.service.name + ' - ' + wmsCapabilities.service.title,
             pos: 'top'
         };
         Trello.post(
-            'boards/' + BOARD_ID + '/lists/',
+            '/lists/',
             newList,
             function (data) {
                 console.log('List created successfully. Data returned:' + JSON.stringify());
