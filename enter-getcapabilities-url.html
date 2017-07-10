@@ -7,7 +7,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL B:</label>
+    <label for="url">WMS GetCapabilities URL C:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -22,9 +22,8 @@
     const BOARD_ID = t.args[0].context.board;
     const SECRET = t.secret;
 
-    createWmsList("foo");
-
-
+    authorizeTrelloUser();
+    //createWmsList("foo");
     //createWmsLayerPreviewCard("foo");
 
     window.urlForm.addEventListener('submit', function (event) {
@@ -52,7 +51,25 @@
 
     });
 
+    function authorizeTrelloUser(){
+        var authenticationSuccess = function() { console.log('Successful authentication'); };
+        var authenticationFailure = function() { console.log('Failed authentication'); };
+        Trello.authorize({
+            type: 'popup',
+            name: 'Getting Started Application',
+            scope: {
+                read: 'true',
+                write: 'true' },
+            expiration: 'never',
+            success: authenticationSuccess,
+            error: authenticationFailure
+        });
+    }
+
     function createWmsList(listName) {
+
+
+
         $.ajax({
             url: 'https://api.trello.com/1/boards/' + BOARD_ID + '/lists' +
             '?key=1a674bbe510eca060f24943e358b76ca' +
