@@ -4,6 +4,7 @@
     <script src="https://trello.com/power-ups/power-up.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://api.trello.com/1/client.js?key=1a674bbe510eca060f24943e358b76ca"></script>
+    <script src="get-capabilities-parser.js"></script>
 </head>
 <body>
 <form id="urlForm">
@@ -15,7 +16,6 @@
     var t = TrelloPowerUp.iframe();
 
     const BOARD_ID = t.args[0].context.board;
-    const TOKEN = t.secret;
 
     authorizeTrelloUser();
 
@@ -31,22 +31,7 @@
             dataType: "xml",
             success: function (gc) {
 
-                var wmsCapabilities = {
-                    'service': {
-                        'name': $(gc).find('Service').find('Name').text(),
-                        'title': $(gc).find('Service').find('Title').text()
-                    }
-                };
-
-                var layers = [];
-                $(gc).find('Layer Layer').each(function () {
-                    layers.push({
-                        'name': $(this).find("Name").text(),
-                        'title': $(this).find("Title").text()
-                    })
-                });
-
-                wmsCapabilities.layers = layers;
+                var wmsCapabilities = new GetCapabilitiesParser().parse(gc);
 
                 createWmsList(wmsCapabilities);
 
