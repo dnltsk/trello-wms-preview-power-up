@@ -46,6 +46,8 @@
     }
     authorizeTrelloUser();
 
+    $('$getCapabilitiesUrl').focus();
+
     $('#urlForm').on('submit', function (event) {
         event.preventDefault();
         var getCapabilitiesUrl = window.getCapabilitiesUrl.value;
@@ -190,6 +192,7 @@
         event.preventDefault();
         $('#errorView').hide();
         $('#formView').show();
+        $('$getCapabilitiesUrl').focus();
     });
 
 </script>
