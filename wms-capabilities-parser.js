@@ -1,15 +1,39 @@
 var GetCapabilitiesParser = function () {
 
     this.parse = function (xmlBody) {
-
-        var wmsCapabilities = {
+        return {
             service: {
                 name: $(xmlBody).find('Service').find('Name').text(),
                 title: $(xmlBody).find('Service').find('Title').text(),
-                getMap: parseGetMapCapabilities(xmlBody)
+                getMap: parseGetMapCapabilities(xmlBody),
+                getLegendGraphic: parseGetLegendGraphicCapabilities(xmlBody),
+                layers: parseLayers(xmlBody)
             }
         };
+    };
 
+    function parseGetMapCapabilities(xmlBody) {
+        if ($(xmlBody).find('Capability Request GetMap') === undefined) {
+            return undefined;
+        }
+        return {
+            resource: $(xmlBody).find('Capability Request GetMap Get OnlineResource').attr('xlink:href'),
+            format: $(xmlBody).find('Capability Request GetMap Format:first').text(),
+            crs: $(xmlBody).find('Capability Layer:first CRS:first').text()
+        }
+    }
+
+    function parseGetLegendGraphicCapabilities(xmlBody) {
+        if ($(xmlBody).find('Capability Request GetLegendGraphic') === undefined) {
+            return undefined
+        }
+        return {
+            resource: $(xmlBody).find('Capability Request GetLegendGraphic Get OnlineResource').attr('xlink:href'),
+            format: $(xmlBody).find('Capability Request GetLegendGraphic Format:first').text()
+        }
+    }
+
+    function parseLayers(xmlBody) {
         var layers = [];
         $(xmlBody).find('Layer Layer').each(function () {
             layers.push({
@@ -17,22 +41,7 @@ var GetCapabilitiesParser = function () {
                 title: $(this).find("Title").text()
             })
         });
-
-        wmsCapabilities.layers = layers;
-
-        return wmsCapabilities;
-    };
-
-    function parseGetMapCapabilities(xmlBody){
-        console.log($(xmlBody).find('Capability Request GetMap Get'));
-        console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource'));
-        console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource[xlink\\:href]'));
-        console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource').attr('xlink:href'));
-        return {
-            resource : $(xmlBody).find('Capability Request GetMap Get OnlineResource').attr('xlink:href'),
-            format : $(xmlBody).find('Capability Request GetMap Format:first').text(),
-            crs : $(xmlBody).find('Capability Layer:first CRS:first').text()
-        }
+        return layers;
     }
 
 
