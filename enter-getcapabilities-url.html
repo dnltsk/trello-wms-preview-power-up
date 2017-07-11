@@ -78,7 +78,8 @@
                 var idList = data.id;
                 createWmsCards(idList, wmsCapabilities);
             },
-            function (error){});
+            function (error) {
+            });
     }
 
     function createWmsCards(idList, wmsCapabilities) {
@@ -115,7 +116,9 @@
             newAttachment,
             function (data) {
                 console.log('GetMap created successfully. Data returned:' + JSON.stringify(data));
-                createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
+                if (wmsCapabilities.getLegendGraphic !== undefined) {
+                    createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
+                }
             });
     }
 
