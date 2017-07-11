@@ -2,7 +2,7 @@ var GetCapabilitiesParser = function () {
 
     this.parse = function (xmlBody) {
         console.log('a', $(xmlBody).filter(':first').attr('version'));
-        console.log('b', $(xmlBody).get(0).attr('version'));
+        console.log('b', $(xmlBody).attr('version'));
         return {
             version : $(xmlBody).filter(':first').attr('version'),
             name: $(xmlBody).find('Service').find('Name').text(),
