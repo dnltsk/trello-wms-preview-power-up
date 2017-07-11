@@ -173,18 +173,14 @@
     }
 
     function tryToClosePopup() {
-        console.log('tryToClosePopup()', callCounter);
         if (callCounter === 0) {
-            console.log('close!');
             t.closePopup();
         } else {
-            console.log('cannot close: ' + callCounter + 'calls are running!');
             setTimeout(tryToClosePopup, 500);
         }
     }
 
     function displayErrorMessage(errorMessage) {
-        console.log('displayErrorMessage()', errorMessage);
         $('#errorMessage').text(errorMessage);
         $('#formView').hide();
         $('#errorView').show();

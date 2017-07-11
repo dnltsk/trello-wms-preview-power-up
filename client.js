@@ -1,10 +1,8 @@
 var enterGetCapabilitiesUrl = function (t) {
-    console.log("enterGetCapabilitiesUrl", t);
     return t.popup({
         title: 'WMS Preview',
         url: 'enter-getcapabilities-url.html',
         callback: function (t) {
-            console.log("close??", t);
             return t.closePopup();
         }
     });
