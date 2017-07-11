@@ -186,14 +186,14 @@
 
     function displayErrorMessage(errorMessage) {
         $('errorMessage').text(errorMessage);
-        $('formView').style("display: none;");
-        $('errorView').style("display: block;");
+        $('formView').css("display: none;");
+        $('errorView').css("display: block;");
     }
 
     $('#errorForm').on('submit', function (event) {
         event.preventDefault();
-        $('errorView').style("display: none;");
-        $('formView').style("display: block;");
+        $('errorView').css("display: none;");
+        $('formView').css("display: block;");
     });
 
 </script>
