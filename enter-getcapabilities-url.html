@@ -9,7 +9,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="getCapabilitiesUrl">WMS GetCapabilities URL C:</label>
+    <label for="getCapabilitiesUrl">WMS GetCapabilities URL D:</label>
     <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
     <button type="submit" class="mod-primary">Load</button>
 </form>
@@ -19,32 +19,6 @@
     var callCounter = 0;
 
     const BOARD_ID = t.args[0].context.board;
-
-    authorizeTrelloUser();
-
-    window.urlForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var getCapabilitiesUrl = window.getCapabilitiesUrl.value;
-        // TODO: validate https; validate 1.3.0
-
-        callCounter++;
-        $.ajax({
-            url: getCapabilitiesUrl,
-            dataType: "xml",
-            success: function (xmlBody) {
-                var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
-                createWmsList(wmsCapabilities, getCapabilitiesUrl);
-                waitToClose();
-                callCounter--;
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', getCapabilitiesUrl);
-                callCounter--;
-
-            }
-        });
-
-    });
 
     function authorizeTrelloUser() {
         Trello.authorize({
@@ -59,10 +33,35 @@
                 console.log('Successful authentication');
             },
             error: function () {
-                console.log('Failed authentication');
+                console.error('Failed authentication');
             }
         });
     }
+    authorizeTrelloUser();
+
+    window.urlForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var getCapabilitiesUrl = window.getCapabilitiesUrl.value;
+        // TODO: validate https; validate 1.3.0
+
+        callCounter++;
+        $.ajax({
+            url: getCapabilitiesUrl,
+            dataType: "xml",
+            success: function (xmlBody) {
+                var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
+                createWmsList(wmsCapabilities, getCapabilitiesUrl);
+                setTimeout(closePopup, 1000);
+                callCounter--;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', getCapabilitiesUrl);
+                callCounter--;
+
+            }
+        });
+
+    });
 
     function createWmsList(wmsCapabilities, getCapabilitiesUrl) {
         var newList = {
@@ -160,13 +159,13 @@
             });
     }
 
-    function waitToClose() {
+    function closePopup() {
         if (callCounter > 0) {
             console.log('close!');
             t.closePopup();
         }else{
             console.log('cannot close: ' + callCounter + 'calls are running!');
-            setTimeout(waitToClose, 500);
+            setTimeout(closePopup, 500);
         }
     }
 
