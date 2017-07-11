@@ -11,7 +11,7 @@ var GetCapabilitiesParser = function () {
     };
 
     function parseGetMapCapabilities(xmlBody) {
-        if ($(xmlBody).find('Capability Request GetMap') === undefined) {
+        if ($(xmlBody).find('Capability Request GetMap').length === 0) {
             return undefined;
         }
         return {
@@ -22,9 +22,7 @@ var GetCapabilitiesParser = function () {
     }
 
     function parseGetLegendGraphicCapabilities(xmlBody) {
-        console.log('GetLegendGraphic', $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic'));
-        console.log('GetLegendGraphic length', $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic').length);
-        if ($(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic') === undefined) {
+        if ($(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic').length === 0) {
             return undefined
         }
         var getLegendGraphic = $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic');
