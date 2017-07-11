@@ -2,6 +2,8 @@
 
 Trello Power-Up to generate a card for every layer of a given Web Map Service (WMS)
 
+(![WMS Preview in action][demo-low.gif])[demo-medium.gif]
+
 ## references
 
 * Power-Up Tutorial http://tech.trello.com/power-up-tutorial-part-one/
