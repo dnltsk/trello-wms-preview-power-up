@@ -87,11 +87,14 @@
             var newCard = {
                 name: layer.name + ' - ' + layer.title,
                 desc: function () {
-                    return [
+                    var text = [
                         JSON.stringify(layer),
-                        'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer),
-                        'GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer)
-                    ].join('\n\n');
+                        'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer)
+                    ];
+                    if (wmsCapabilities.getLegendGraphic !== undefined) {
+                        text.push('GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer));
+                    }
+                    return text.join('\n\n');
                 },
                 idList: idList,
                 pos: 'bottom'
