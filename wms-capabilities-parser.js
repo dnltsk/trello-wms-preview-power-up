@@ -2,13 +2,11 @@ var GetCapabilitiesParser = function () {
 
     this.parse = function (xmlBody) {
         return {
-            service: {
-                name: $(xmlBody).find('Service').find('Name').text(),
-                title: $(xmlBody).find('Service').find('Title').text(),
-                getMap: parseGetMapCapabilities(xmlBody),
-                getLegendGraphic: parseGetLegendGraphicCapabilities(xmlBody),
-                layers: parseLayers(xmlBody)
-            }
+            name: $(xmlBody).find('Service').find('Name').text(),
+            title: $(xmlBody).find('Service').find('Title').text(),
+            getMap: parseGetMapCapabilities(xmlBody),
+            getLegendGraphic: parseGetLegendGraphicCapabilities(xmlBody),
+            layers: parseLayers(xmlBody)
         };
     };
 

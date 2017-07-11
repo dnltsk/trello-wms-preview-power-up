@@ -1,7 +1,7 @@
 
 function createGetMapUrl(wmsCapabilities, layer) {
     return [
-        wmsCapabilities.service.getMap.resource,
+        wmsCapabilities.getMap.resource,
         'SERVICE=WMS',
         'VERSION=1.3.0',
         'REQUEST=GetMap',
@@ -11,13 +11,13 @@ function createGetMapUrl(wmsCapabilities, layer) {
         'BBOX=-90,-180,90,180',
         'width=1024',
         'height=512',
-        'format='+wmsCapabilities.service.getMap.format
+        'format='+wmsCapabilities.getMap.format
     ].join('&');
 }
 
 function createGetLegendGraphicUrl(wmsCapabilities, layer) {
     return [
-        wmsCapabilities.service.getLegendGraphic.resource,
+        wmsCapabilities.getLegendGraphic.resource,
         'SERVICE=WMS',
         'VERSION=1.3.0',
         'REQUEST=GetLegendGraphic',
@@ -27,6 +27,6 @@ function createGetLegendGraphicUrl(wmsCapabilities, layer) {
         'BBOX=-90,-180,90,180',
         'width=1024',
         'height=512',
-        'format='+wmsCapabilities.service.getLegendGraphic.format
+        'format='+wmsCapabilities.getLegendGraphic.format
     ].join('&');
 }
