@@ -9,7 +9,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="getCapabilitiesUrl">WMS GetCapabilities URL D:</label>
+    <label for="getCapabilitiesUrl">WMS GetCapabilities URL E:</label>
     <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
     <button type="submit" class="mod-primary">Load</button>
 </form>
@@ -160,6 +160,7 @@
     }
 
     function tryToClosePopup() {
+        console.log('tryToClosePopup()', callCounter);
         if (callCounter === 0) {
             console.log('close!');
             t.closePopup();
