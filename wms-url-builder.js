@@ -8,7 +8,7 @@ function createGetMapUrl(wmsCapabilities, layer) {
         'LAYERS=' + layer.name,
         'STYLES=',
         'CRS=' + wmsCapabilities.service.getMap.crs,
-        'BBOX=-180,-90,180,90',
+        'BBOX=-90,-180,90,180',
         'width=1024',
         'height=512',
         'format='+wmsCapabilities.service.getMap.format
