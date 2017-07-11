@@ -93,6 +93,8 @@
                     ];
                     if (wmsCapabilities.getLegendGraphic !== undefined) {
                         text.push('GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer));
+                    }else{
+                        text.push('GetLegendGraphic request not provided by that service');
                     }
                     return text.join('\n\n');
                 },
