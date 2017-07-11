@@ -12,7 +12,7 @@ TrelloPowerUp.initialize(
     {
         'board-buttons': function (t, options) {
             return [{
-                icon: 'https://damonbraces.com/img/bethany-hamilton/emoji/DamonBraces_S016.png',
+                icon: './logo.png',
                 text: 'WMS Preview',
                 callback: enterGetCapabilitiesUrl
             }];
