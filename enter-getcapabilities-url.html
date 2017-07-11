@@ -10,7 +10,7 @@
 <body>
 <div id="formView" style="display: block;">
     <form id="urlForm">
-        <label for="getCapabilitiesUrl">WMS GetCapabilities URL A:</label>
+        <label for="getCapabilitiesUrl">WMS GetCapabilities URL B:</label>
         <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
         <button type="submit" class="mod-primary">Load</button>
     </form>
@@ -190,7 +190,7 @@
         $('errorView').style("display: block;");
     }
 
-    window.urlForm.addEventListener('#urlForm submit', function (event) {
+    window.urlForm.addEventListener('#errorForm submit', function (event) {
         event.preventDefault();
         $('errorView').style("display: none;");
         $('formView').style("display: block;");
