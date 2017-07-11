@@ -6,11 +6,10 @@
     <script src="https://api.trello.com/1/client.js?key=1a674bbe510eca060f24943e358b76ca"></script>
     <script src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.min.js"></script>
     <script src="wms-capabilities-parser.js"></script>
-    <script src="wms-url-builder.js"></script>
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL E:</label>
+    <label for="url">WMS GetCapabilities URL A:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -30,31 +29,18 @@
         // TODO: validate https; validate 1.3.0
 
 
-        Promise.resolve($.ajax({
+        $.ajax({
             url: url,
-            dataType: "xml"
-//            ,
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                console.error('error in getCapabilities loading', url);
-//                t.closePopup();
-//            }
-        })).then(function (xmlBody) {
-            console.log("start parse()");
-            return new GetCapabilitiesParser().parse(xmlBody);
-
-        }).then(function(wmsCapabilities){
-            console.log("starting createWmsList()");
-            var wmsList;
-            createWmsList(wmsCapabilities).then(function(_wmsList){wmsList=_wmsList});
-            return {
-                wmsList: wmsList,
-                wmsCapabilities: wmsCapabilities
-            };
-        }).then(function (listResult) {
-            console.log("start createWmsCards() ", listResult);
-            return createWmsCards(
-                listResult.wmsList.id,
-                listResult.wmsCapabilities);
+            dataType: "xml",
+            success: function (gc) {
+                var wmsCapabilities = new GetCapabilitiesParser().parse(gc);
+                createWmsList(wmsCapabilities);
+                //t.closePopup();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('error in getCapabilities loading', url);
+                t.closePopup();
+            }
         });
 
     });
@@ -83,7 +69,15 @@
             name: wmsCapabilities.service.name + ' - ' + wmsCapabilities.service.title,
             pos: 'top'
         };
-        return Trello.post('/lists/', newList);
+        Trello.post(
+            '/lists/',
+            newList,
+            function (data) {
+                console.log('List created successfully. Data returned:' + JSON.stringify());
+                var idList = data.id;
+                createWmsCards(idList, wmsCapabilities);
+            },
+            function (error){});
     }
 
     function createWmsCards(idList, wmsCapabilities) {
