@@ -10,7 +10,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL A:</label>
+    <label for="url">WMS GetCapabilities URL B:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -35,6 +35,7 @@
             dataType: "xml",
             success: function (gc) {
                 var wmsCapabilities = new GetCapabilitiesParser().parse(gc);
+                console.log("wmsCapabilities", wmsCapabilities);
                 createWmsList(wmsCapabilities);
                 //t.closePopup();
             },

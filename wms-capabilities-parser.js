@@ -25,7 +25,7 @@ var GetCapabilitiesParser = function () {
 
     function parseGetMapCapabilities(xmlBody){
         return {
-            resource : $(xmlBody).find('Capability Request GetMap OnlineResource[href]').text(),
+            resource : $(xmlBody).find('Capability Request GetMap OnlineResource[xlink\\:href]').text(),
             format : $(xmlBody).find('Capability Request GetMap Format:first').text(),
             crs : $(xmlBody).find('Capability Layer:first CRS:first').text()
         }
