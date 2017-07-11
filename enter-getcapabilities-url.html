@@ -9,9 +9,9 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL B:</label>
-    <input name="url" id="url" type="text">
-    <button type="submit" class="mod-primary">Save</button>
+    <label for="getCapabilitiesUrl">WMS GetCapabilities URL C:</label>
+    <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
+    <button type="submit" class="mod-primary">Load</button>
 </form>
 <script>
     var t = TrelloPowerUp.iframe();
@@ -24,23 +24,23 @@
 
     window.urlForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        var url = window.url.value;
-        console.log('url', url);
+        var getCapabilitiesUrl = window.getCapabilitiesUrl.value;
         // TODO: validate https; validate 1.3.0
 
-
+        callCounter++;
         $.ajax({
-            url: url,
+            url: getCapabilitiesUrl,
             dataType: "xml",
-            success: function (gc) {
-                var wmsCapabilities = new GetCapabilitiesParser().parse(gc);
-                console.log("wmsCapabilities", wmsCapabilities);
-                createWmsList(wmsCapabilities);
-                //t.closePopup();
+            success: function (xmlBody) {
+                var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
+                createWmsList(wmsCapabilities, getCapabilitiesUrl);
+                waitToClose();
+                callCounter--;
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', url);
-                t.closePopup();
+                console.error('error in getCapabilities loading', getCapabilitiesUrl);
+                callCounter--;
+
             }
         });
 
@@ -64,36 +64,41 @@
         });
     }
 
-    function createWmsList(wmsCapabilities) {
+    function createWmsList(wmsCapabilities, getCapabilitiesUrl) {
         var newList = {
             idBoard: BOARD_ID,
             name: wmsCapabilities.name + ' - ' + wmsCapabilities.title,
             pos: 'top'
         };
+        callCounter++;
         Trello.post(
             '/lists/',
             newList,
             function (data) {
-                console.log('List created successfully. Data returned:' + JSON.stringify());
                 var idList = data.id;
-                createWmsCards(idList, wmsCapabilities);
+                createWmsCards(idList, wmsCapabilities, getCapabilitiesUrl);
+                callCounter--;
             },
             function (error) {
+                console.error('cannot create list', error);
+                callCounter--;
             });
     }
 
-    function createWmsCards(idList, wmsCapabilities) {
+    function createWmsCards(idList, wmsCapabilities, getCapabilitiesUrl) {
         wmsCapabilities.layers.forEach(function (layer) {
             var newCard = {
                 name: layer.name + ' - ' + layer.title,
                 desc: function () {
                     var text = [
-                        JSON.stringify(layer),
+                        'layer name: ' + layer.name,
+                        'layer title: ' + layer.title,
+                        'GetCapabilities : ' + getCapabilitiesUrl,
                         'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer)
                     ];
                     if (wmsCapabilities.getLegendGraphic !== undefined) {
                         text.push('GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer));
-                    }else{
+                    } else {
                         text.push('GetLegendGraphic request not provided by that service');
                     }
                     return text.join('\n\n');
@@ -101,12 +106,17 @@
                 idList: idList,
                 pos: 'bottom'
             };
+            callCounter++;
             Trello.post(
                 '/cards/',
                 newCard,
                 function (data) {
-                    console.log('Card created successfully. Data returned:' + JSON.stringify(data));
                     createGetMapAttachment(data.id, wmsCapabilities, layer);
+                    callCounter--;
+                },
+                function (error) {
+                    console.error('cannot create card', error);
+                    callCounter--;
                 });
         });
     }
@@ -116,14 +126,19 @@
             url: createGetMapUrl(wmsCapabilities, layer),
             name: 'GetMap - World'
         };
+        callCounter++;
         Trello.post(
             '/cards/' + idCard + '/attachments',
             newAttachment,
             function (data) {
-                console.log('GetMap created successfully. Data returned:' + JSON.stringify(data));
                 if (wmsCapabilities.getLegendGraphic !== undefined) {
                     createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
                 }
+                callCounter--;
+            },
+            function (error) {
+                console.error('cannot create GetMap attachment', error);
+                callCounter--;
             });
     }
 
@@ -132,13 +147,27 @@
             url: createGetLegendGraphicUrl(wmsCapabilities, layer),
             name: 'GetLegendGraphic'
         };
+        callCounter++;
         Trello.post(
             '/cards/' + idCard + '/attachments',
             newAttachment,
             function (data) {
-                console.log('GetLegendGraphic created successfully. Data returned:' + JSON.stringify(data));
-                //createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer);
+                callCounter--;
+            },
+            function (error) {
+                console.error('cannot create GetLegendGraphic attachment', error);
+                callCounter--;
             });
+    }
+
+    function waitToClose() {
+        if (callCounter > 0) {
+            console.log('close!');
+            t.closePopup();
+        }else{
+            console.log('cannot close: ' + callCounter + 'calls are running!');
+            setTimeout(waitToClose, 500);
+        }
     }
 
 </script>
