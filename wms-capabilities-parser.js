@@ -1,11 +1,8 @@
 var GetCapabilitiesParser = function () {
 
     this.parse = function (xmlBody) {
-        console.log('a', $(xmlBody).filter(':first').attr('version'));
-        console.log('b', $(xmlBody).attr('version'));
-        console.log('c', $(xmlBody).find('Service').parent().attr('version'));
         return {
-            version : $(xmlBody).filter(':first').attr('version'),
+            version : $(xmlBody).find('Service').parent().attr('version'),
             name: $(xmlBody).find('Service').find('Name').text(),
             title: $(xmlBody).find('Service').find('Title').text(),
             getMap: parseGetMapCapabilities(xmlBody),
