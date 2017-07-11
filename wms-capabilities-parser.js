@@ -22,12 +22,13 @@ var GetCapabilitiesParser = function () {
     }
 
     function parseGetLegendGraphicCapabilities(xmlBody) {
-        if ($(xmlBody).find('Capability Request GetLegendGraphic') === undefined) {
+        if ($(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic') === undefined) {
             return undefined
         }
+        var getLegendGraphic = $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic');
         return {
-            resource: $(xmlBody).find('Capability Request GetLegendGraphic Get OnlineResource').attr('xlink:href'),
-            format: $(xmlBody).find('Capability Request GetLegendGraphic Format:first').text()
+            resource: getLegendGraphic.find('Get OnlineResource').attr('xlink:href'),
+            format: getLegendGraphic.find('Format:first').text()
         }
     }
 
