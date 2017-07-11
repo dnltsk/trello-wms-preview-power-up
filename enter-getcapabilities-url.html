@@ -51,7 +51,7 @@
             success: function (xmlBody) {
                 var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                 createWmsList(wmsCapabilities, getCapabilitiesUrl);
-                setTimeout(closePopup, 1000);
+                tryToClosePopup();
                 callCounter--;
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -159,13 +159,13 @@
             });
     }
 
-    function closePopup() {
-        if (callCounter > 0) {
+    function tryToClosePopup() {
+        if (callCounter === 0) {
             console.log('close!');
             t.closePopup();
         }else{
             console.log('cannot close: ' + callCounter + 'calls are running!');
-            setTimeout(closePopup, 500);
+            setTimeout(tryToClosePopup, 500);
         }
     }
 
