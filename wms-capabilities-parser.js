@@ -27,8 +27,9 @@ var GetCapabilitiesParser = function () {
         console.log($(xmlBody).find('Capability Request GetMap Get'));
         console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource'));
         console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource[xlink\\:href]'));
+        console.log($(xmlBody).find('Capability Request GetMap Get OnlineResource').attr('xlink:href'));
         return {
-            resource : $(xmlBody).find('Capability Request GetMap Get OnlineResource[xlink\\:href]').text(),
+            resource : $(xmlBody).find('Capability Request GetMap Get OnlineResource').attr('xlink:href'),
             format : $(xmlBody).find('Capability Request GetMap Format:first').text(),
             crs : $(xmlBody).find('Capability Layer:first CRS:first').text()
         }
