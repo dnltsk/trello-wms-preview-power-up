@@ -2,6 +2,7 @@ var GetCapabilitiesParser = function () {
 
     this.parse = function (xmlBody) {
         return {
+            version : $(xmlBody).find('WMS_Capabilities').attr('version'),
             name: $(xmlBody).find('Service').find('Name').text(),
             title: $(xmlBody).find('Service').find('Title').text(),
             getMap: parseGetMapCapabilities(xmlBody),
