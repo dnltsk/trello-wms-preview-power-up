@@ -9,7 +9,7 @@
 </head>
 <body>
 <form id="urlForm">
-    <label for="url">WMS GetCapabilities URL B:</label>
+    <label for="url">WMS GetCapabilities URL C:</label>
     <input name="url" id="url" type="text">
     <button type="submit" class="mod-primary">Save</button>
 </form>
@@ -31,23 +31,24 @@
 
         Promise.resolve($.ajax({
             url: url,
-            dataType: "xml",
-            success: function (gc) {
-                console.log("in success");
-                var wmsCapabilities = new GetCapabilitiesParser().parse(gc);
-                createWmsList(wmsCapabilities);
-                //t.closePopup();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('error in getCapabilities loading', url);
-                t.closePopup();
-            }
-        })).then(function (nothing) {
-            console.log("in then ", nothing);
-            return true;
-        }).then(function (nothing2) {
-            console.log("in then then ", nothing2);
-            return true;
+            dataType: "xml"
+//            ,
+//            error: function (jqXHR, textStatus, errorThrown) {
+//                console.error('error in getCapabilities loading', url);
+//                t.closePopup();
+//            }
+        })).then(function (xmlBody) {
+            console.log("start GetCapabilitiesParser()");
+            var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
+            return {
+                wmsCapabilities: wmsCapabilities,
+                wmsList: createWmsList(wmsCapabilities)
+            };
+        }).then(function (listResult) {
+            console.log("start createWmsCards() ", listResult);
+            return createWmsCards(
+                listResult.wmsList.id,
+                listResult.wmsCapabilities);
         });
 
     });
@@ -76,16 +77,7 @@
             name: wmsCapabilities.service.name + ' - ' + wmsCapabilities.service.title,
             pos: 'top'
         };
-        Trello.post(
-            '/lists/',
-            newList,
-            function (data) {
-                console.log('List created successfully. Data returned:' + JSON.stringify());
-                var idList = data.id;
-                createWmsCards(idList, wmsCapabilities);
-            },
-            function (error) {
-            });
+        return Trello.post('/lists/', newList);
     }
 
     function createWmsCards(idList, wmsCapabilities) {
