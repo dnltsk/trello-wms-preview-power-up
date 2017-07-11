@@ -22,6 +22,8 @@ var GetCapabilitiesParser = function () {
     }
 
     function parseGetLegendGraphicCapabilities(xmlBody) {
+        console.log('GetLegendGraphic', $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic'));
+        console.log('GetLegendGraphic length', $(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic').length);
         if ($(xmlBody).find('Capability Request GetLegendGraphic, Capability Request sld\\:GetLegendGraphic') === undefined) {
             return undefined
         }
