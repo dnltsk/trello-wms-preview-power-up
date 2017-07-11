@@ -2,7 +2,7 @@
   "name": "WMS Preview",
   "details":"Trello Power-Up to generate a card for every layer of a given Web Map Service (WMS)",
   "icon": {
-    "url": "https://damonbraces.com/img/bethany-hamilton/emoji/DamonBraces_S016.png"
+    "url": "./logo.png"
   },
   "author": "dnltsk",
   "capabilities": [
