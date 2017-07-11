@@ -45,7 +45,7 @@
         }).then(function(wmsCapabilities){
             console.log("starting createWmsList()");
             return {
-                wmsList: createWmsList(wmsCapabilities).resolve(),
+                wmsList: createWmsList(wmsCapabilities).promise(),
                 wmsCapabilities: wmsCapabilities
             };
         }).then(function (listResult) {
