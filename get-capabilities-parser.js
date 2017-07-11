@@ -4,13 +4,13 @@ var GetCapabilitiesParser = function () {
 
         var wmsCapabilities = {
             'service': {
-                'name': $(gc).find('Service').find('Name').text(),
-                'title': $(gc).find('Service').find('Title').text()
+                'name': $(xmlBody).find('Service').find('Name').text(),
+                'title': $(xmlBody).find('Service').find('Title').text()
             }
         };
 
         var layers = [];
-        $(gc).find('Layer Layer').each(function () {
+        $(xmlBody).find('Layer Layer').each(function () {
             layers.push({
                 'name': $(this).find("Name").text(),
                 'title': $(this).find("Title").text()
