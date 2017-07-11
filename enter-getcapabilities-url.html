@@ -10,7 +10,7 @@
 <body>
 <div id="formView" style="display: block;">
     <form id="urlForm">
-        <label for="getCapabilitiesUrl">WMS GetCapabilities URL F:</label>
+        <label for="getCapabilitiesUrl">WMS GetCapabilities URL A:</label>
         <input name="getCapabilitiesUrl" id="getCapabilitiesUrl" type="text">
         <button type="submit" class="mod-primary">Load</button>
     </form>
@@ -40,8 +40,8 @@
             success: function () {
                 console.log('Successful authentication');
             },
-            error: function () {
-                console.error('Failed authentication');
+            error: function (error) {
+                console.error('Failed authentication', error);
             }
         });
     }
