@@ -29,5 +29,4 @@ function createGetLegendGraphicUrl(wmsCapabilities, layer) {
         'height=512',
         'format='+wmsCapabilities.service.getLegendGraphic.format
     ].join('&');
-    return 'http://129.206.228.72/cached/osm/service?service=wms&version=1.1.1&request=GetLegendGraphic&layer=' + layer.name + '&format=image/png'
 }
