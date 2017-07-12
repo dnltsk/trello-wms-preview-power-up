@@ -3,8 +3,8 @@ var GetCapabilitiesParser = function () {
     this.parse = function (xmlBody) {
         return {
             version : $(xmlBody).find('Service').parent().attr('version'),
-            name: $(xmlBody).find('Service').find('Name').text(),
-            title: $(xmlBody).find('Service').find('Title').text(),
+            name: $(xmlBody).find('Service').find('> Name').text(),
+            title: $(xmlBody).find('Service').find('> Title').text(),
             getMap: parseGetMapCapabilities(xmlBody),
             getLegendGraphic: parseGetLegendGraphicCapabilities(xmlBody),
             layers: parseLayers(xmlBody)
@@ -37,8 +37,8 @@ var GetCapabilitiesParser = function () {
         var layers = [];
         $(xmlBody).find('Layer Layer').each(function () {
             layers.push({
-                name: $(this).find("Name").text(),
-                title: $(this).find("Title").text()
+                name: $(this).find("> Name").text(),
+                title: $(this).find("> Title").text()
             })
         });
         return layers;
