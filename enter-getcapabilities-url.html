@@ -138,7 +138,8 @@
     function createGetMapAttachment(idCard, wmsCapabilities, layer) {
         var newAttachment = {
             url: createGetMapUrl(wmsCapabilities, layer),
-            name: 'GetMap - World'
+            name: 'GetMap - World',
+            mimeType: wmsCapabilities.getMap.format
         };
         callCounter++;
         Trello.post(
@@ -159,7 +160,8 @@
     function createGetLegendGraphicAttachment(idCard, wmsCapabilities, layer) {
         var newAttachment = {
             url: createGetLegendGraphicUrl(wmsCapabilities, layer),
-            name: 'GetLegendGraphic'
+            name: 'GetLegendGraphic',
+            mimeType: wmsCapabilities.getLegendGraphic.format
         };
         callCounter++;
         Trello.post(
