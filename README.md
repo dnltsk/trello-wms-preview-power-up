@@ -18,7 +18,7 @@ https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/alaska_vis.cgi?SERVICE=WMS&VE
 => legend graphic is a blank white image
 
 * IEM WMS Iowa Rainfall of the Iowa State University<br>
-https://mesonet.agron.iastate.edu/cgi-bin/wms/iowa/rainfall.cgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities
+https://mesonet.agron.iastate.edu/cgi-bin/wms/iowa/rainfall.cgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities<br>
 => responding images do not have a proper mime-type (configuration broken)
 
 * Cached WMS with OpenStreetMap Data of the Uni Heidelberg (it is proxied via Github to be accessible via https:// and with CORS headers)<br>
@@ -26,7 +26,7 @@ https://dnltsk.github.io/trello-wms-preview-power-up/test-data/sample-get-capabi
 => layer "osm_auto:osm_lulc" is not working (configuration broken)
 
 * https://nowcoast.noaa.gov/arcgis/services/nowcoast/obs_meteocean_insitu_sfc_time/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities<br>
--> some layers do not have a name (configuration broken)
+=> some layers do not have a name (configuration broken)
 
 ## references
 
