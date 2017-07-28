@@ -1,11 +1,19 @@
 var enterGetCapabilitiesUrl = function (t) {
     return t.popup({
         title: 'WMS Preview',
-        //url: 'enter-getcapabilities-url.html',
-        url: 'attachment-select-target.html',
-        callback: function (t) {
-            return t.closePopup();
-        }
+        items: [{
+            text: 'attach Map..',
+            callback: function (t, opts) {
+                console.log('attach Map..', t, opts);
+            },
+            url: 'attachment-select-target.html'
+        }, {
+            text: 'attach LegendGraphic..',
+            callback: function (t, opts) {
+                console.log('attach LegendGraphic..', t, opts);
+            },
+            url: 'attachment-select-target.html'
+        }]
     });
 };
 
