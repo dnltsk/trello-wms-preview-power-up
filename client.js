@@ -18,9 +18,8 @@ var attachMapPopup = function (t, opts) {
 
             return $.ajax({
                 url: search,
-                dataType: "xml"
-            }).done(
-                function (xmlBody) {
+                dataType: "xml",
+                success: function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
                         console.error('The WMS Service must be in Version 1.3.0 but is ' + wmsCapabilities.version);
@@ -32,15 +31,15 @@ var attachMapPopup = function (t, opts) {
                     return new Promise(function (resolve) {
                         resolve([]);
                     });
-                }
-            ).fail(
-                function (error) {
+                },
+                error: function (error) {
                     console.error('Unable to load GetCapabilities document: ', error);
                     return new Promise(function (resolve) {
                         resolve([]);
                     });
                 }
-            );
+            });
+
         },
         search: {
             // optional # of ms to debounce search to
