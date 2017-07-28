@@ -19,7 +19,7 @@ var attachMapPopup = function (t, opts) {
             return $.ajax({
                 url: search,
                 dataType: "xml"
-            }).then(
+            }).done(
                 function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
@@ -33,7 +33,7 @@ var attachMapPopup = function (t, opts) {
                         reject();
                     });
                 }
-            ).catch(
+            ).fail(
                 function (error) {
                     console.error('Unable to load GetCapabilities document: ', error);
                     return new Promise(function (resolve, reject) {
