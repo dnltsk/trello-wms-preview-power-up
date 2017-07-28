@@ -1,85 +1,3 @@
-var attachMapPopup = function (t, opts) {
-    return t.popup({
-        title: 'Attach Map..',
-        items: function (t, options) {
-            var search = options.search;
-            if (!search || search.length === 0) {
-                //no input
-                return new Promise(function (resolve) {
-                    resolve([])
-                });
-            }
-            if (search.trim().indexOf("https://") === -1) {
-                //input does not start with https://
-                return new Promise(function (resolve) {
-                    resolve([]);
-                });
-            }
-
-            var jQueryPromise = $.ajax({
-                url: search,
-                dataType: "xml"
-            });
-            return jQueryPromise.then(
-                function (xmlBody) {
-                    var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
-                    if (wmsCapabilities.version !== '1.3.0') {
-                        console.error('The WMS Service must be in Version 1.3.0 but is ' + wmsCapabilities.version);
-                        return new Promise(function (resolve) {
-                            resolve([]);
-                        });
-                    }
-                    var items = wmsCapabilities.layers.map(function (layer) {
-                        return {
-                            text: layer.title,
-                            callback: function () {
-                                var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                console.log("GetMap URL: ", getMapUrl);
-                                t.attach({
-                                    name: 'GetMap: ' + layer.title,
-                                    url: getMapUrl
-                                });
-                            }
-                        }
-                            ;
-                    });
-                    return new Promise(function (resolve) {
-                        resolve(items)
-                    });
-                },
-                function (error) {
-                    console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
-                    return new Promise(function (resolve) {
-                        resolve([]);
-                    });
-                })
-
-        },
-        search: {
-            // optional # of ms to debounce search to
-            // defaults to 300, override must be larger than 300
-            debounce: 300,
-            placeholder: 'Enter WMS GetCapabilities URL',
-            empty: 'No Map Layers found',
-            searching: 'Searching for Map Layers...'
-        }
-    })
-};
-
-var enterGetCapabilitiesUrl = function (t) {
-    return t.popup({
-        title: 'WMS Preview',
-        items: [{
-            text: 'attach Map..',
-            callback: attachMapPopup
-        }, {
-            text: 'attach LegendGraphic..',
-            callback: attachMapPopup
-
-        }]
-    });
-};
-
 TrelloPowerUp.initialize(
     {
         'card-buttons': function (t, options) {
@@ -90,6 +8,99 @@ TrelloPowerUp.initialize(
             }];
         }
     });
+
+var enterGetCapabilitiesUrl = function (t) {
+    return t.popup({
+        title: 'WMS Preview',
+        items: [{
+            text: 'attach Map..',
+            callback: new AttachPopup().attachMap()
+        }, {
+            text: 'attach LegendGraphic..',
+            callback: new AttachPopup().attachLegendGraphic()
+        }]
+    });
+};
+
+var AttachPopup = function () {
+    this.attachMap = function (t, opts) {
+        return this.attachGenericPopup(t, opts);
+    };
+
+    this.attachLegendGraphic = function (t, opts) {
+        return this.attachGenericPopup(t, opts);
+    };
+
+    this.attachGenericPopup = function (t, opts) {
+        return t.popup({
+            title: 'Attach Map..',
+            items: function (t, options) {
+                var search = options.search;
+                if (!search || search.length === 0) {
+                    //no input
+                    return new Promise(function (resolve) {
+                        resolve([])
+                    });
+                }
+                if (search.trim().indexOf("https://") === -1) {
+                    //input does not start with https://
+                    return new Promise(function (resolve) {
+                        resolve([]);
+                    });
+                }
+
+                var jQueryPromise = $.ajax({
+                    url: search,
+                    dataType: "xml"
+                });
+                return jQueryPromise.then(
+                    function (xmlBody) {
+                        var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
+                        if (wmsCapabilities.version !== '1.3.0') {
+                            console.error('The WMS Service must be in Version 1.3.0 but is ' + wmsCapabilities.version);
+                            return new Promise(function (resolve) {
+                                resolve([]);
+                            });
+                        }
+                        var items = wmsCapabilities.layers.map(function (layer) {
+                            return {
+                                text: layer.title,
+                                callback: function () {
+                                    var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
+                                    console.log("GetMap URL: ", getMapUrl);
+                                    t.attach({
+                                        name: 'GetMap: ' + layer.title,
+                                        url: getMapUrl
+                                    });
+                                }
+                            }
+                                ;
+                        });
+                        return new Promise(function (resolve) {
+                            resolve(items)
+                        });
+                    },
+                    function (error) {
+                        console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
+                        return new Promise(function (resolve) {
+                            resolve([]);
+                        });
+                    })
+
+            },
+            search: {
+                // optional # of ms to debounce search to
+                // defaults to 300, override must be larger than 300
+                debounce: 300,
+                placeholder: 'Enter a WMS GetCapabilities URL',
+                empty: 'No Map Layers found',
+                searching: 'Searching for Map Layers...'
+            }
+        })
+    };
+
+};
+
 
 /**
  *
