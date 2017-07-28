@@ -29,15 +29,17 @@ var attachMapPopup = function (t, opts) {
                             resolve([]);
                         });
                     }
-                    console.log('fine', wmsCapabilities);
+
+                    var items = wmsCapabilities.layers.map(function (layer) {
+                        return {
+                            text: layer.title,
+                            callback: function () {
+                                console.log("GetMap URL: ", createGetMapUrl(wmsCapabilities, layer))
+                            }
+                        }
+                    });
                     return new Promise(function (resolve) {
-                        resolve([{
-                            text: 'Result 1',
-                            callback: function (t, opts) { }
-                        }, {
-                            text: 'Result 2',
-                            callback: function (t, opts) { }
-                        }]);
+                        resolve(items)
                     });
                 },
                 function (error) {

@@ -99,25 +99,25 @@
 
     function createWmsCards(idList, wmsCapabilities, getCapabilitiesUrl) {
         wmsCapabilities.layers.forEach(function (layer) {
-            var newCard = {
-                name: layer.name + ' - ' + layer.title,
-                desc: function () {
-                    var text = [
-                        'layer name: ' + layer.name,
-                        'layer title: ' + layer.title,
-                        'GetCapabilities : ' + getCapabilitiesUrl,
-                        'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer)
-                    ];
-                    if (wmsCapabilities.getLegendGraphic !== undefined) {
-                        text.push('GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer));
-                    } else {
-                        text.push('GetLegendGraphic request not provided by that service');
-                    }
-                    return text.join('\n\n');
-                },
-                idList: idList,
-                pos: 'bottom'
-            };
+                var newCard = {
+                    name: layer.name + ' - ' + layer.title,
+                    desc: function () {
+                        var text = [
+                            'layer name: ' + layer.name,
+                            'layer title: ' + layer.title,
+                            'GetCapabilities : ' + getCapabilitiesUrl,
+                            'GetMap World: ' + createGetMapUrl(wmsCapabilities, layer)
+                        ];
+                        if (wmsCapabilities.getLegendGraphic !== undefined) {
+                            text.push('GetLegendGraphic World: ' + createGetLegendGraphicUrl(wmsCapabilities, layer));
+                        } else {
+                            text.push('GetLegendGraphic request not provided by that service');
+                        }
+                        return text.join('\n\n');
+                    },
+                    idList: idList,
+                    pos: 'bottom'
+                };
             callCounter++;
             Trello.post(
                 '/cards/',
