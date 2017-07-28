@@ -83,9 +83,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getLegendGraphicUrl
                                     });
                                 }
-                                }
                             }
-                            ;
+                        };
                     });
                     return new Promise(function (resolve) {
                         resolve(items)
@@ -186,6 +185,7 @@ function createGetMapUrl(wmsCapabilities, layer) {
  *
  */
 function createGetLegendGraphicUrl(wmsCapabilities, layer) {
+    console.log('createGetLegendGraphicUrl', wmsCapabilities, layer);
     return [
         wmsCapabilities.getLegendGraphic.resource,
         'SERVICE=WMS',
