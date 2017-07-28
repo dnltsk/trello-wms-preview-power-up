@@ -51,8 +51,6 @@
     $('#urlForm').on('submit', function (event) {
         event.preventDefault();
         var getCapabilitiesUrl = window.getCapabilitiesUrl.value;
-        // TODO: validate https; validate 1.3.0
-
         callCounter++;
         $.ajax({
             url: getCapabilitiesUrl,

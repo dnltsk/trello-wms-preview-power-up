@@ -20,18 +20,22 @@ var attachMapPopup = function (t, opts) {
                     }]);
                 });
             }
-            var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
-            if (wmsCapabilities.version !== '1.3.0') {
-                //input does not start with https://
-                return new Promise(function (resolve) {
-                    resolve([{
-                        text: 'Error: The WMS Service must be in Version 1.3.0 but is '+wmsCapabilities.version,
-                        callback: function (t, opts) {
-                            //do nothing
-                        }
-                    }]);
-                });
-            }
+
+            $.ajax({
+                url: search,
+                dataType: "xml",
+                success: function (xmlBody) {
+                    var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
+                    if (wmsCapabilities.version !== '1.3.0') {
+                        console.error('The WMS Service must be in Version 1.3.0 but is '+wmsCapabilities.version);
+                    }
+                    console.log('fine', wmsCapabilities);
+                },
+                error: function (error) {
+                    console.error('Unable to load GetCapabilities document: ', error);
+                }
+            });
+
             return new Promise(function (resolve) {
                 //default
                 resolve([]);
