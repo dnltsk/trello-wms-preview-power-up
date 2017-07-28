@@ -1,23 +1,42 @@
+var attachMapPopup = function (t, opts) {
+    return t.popup({
+        title: 'Attach Map..',
+        items: function (t, options) {
+            var search = options.search;
+            return new Promise(function (resolve) {
+                // you'd probably be making a network request at this point
+                resolve([{
+                    text: 'Result 1',
+                    callback: function (t, opts) {
+                        console.log('Result 1')
+                    }
+                }, {
+                    text: 'Result 2',
+                    callback: function (t, opts) {
+                        console.log('Result 2')
+                    }
+                }]);
+            });
+        },
+        search: {
+            // optional # of ms to debounce search to
+            // defaults to 300, override must be larger than 300
+            debounce: 300,
+            placeholder: 'Enter WMS GetCapabilities URL',
+            empty: 'No Map Layers found',
+            searching: 'Searching for Map Layers...'
+        }
+    });
+
 var enterGetCapabilitiesUrl = function (t) {
         return t.popup({
             title: 'WMS Preview',
             items: [{
                 text: 'attach Map..',
-                callback: function (t, opts) {
-                    return t.popup({
-                        title: 'WMS Preview - attach Map..',
-                        url: 'enter-getcapabilities-url.html'
-                    })
-                }
-                //, url: 'attachment-select-target.html'
+                callback: attachMapPopup
             }, {
                 text: 'attach LegendGraphic..',
-                callback: function (t, opts) {
-                    return t.popup({
-                        title: 'WMS Preview - attach LegendGraphic..',
-                        url: 'enter-getcapabilities-url.html'
-                    })
-                }
+                callback: attachMapPopup
 
             }]
         })
