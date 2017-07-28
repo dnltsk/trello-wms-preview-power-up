@@ -10,7 +10,7 @@ var enterGetCapabilitiesUrl = function (t) {
 
 TrelloPowerUp.initialize(
     {
-        'board-buttons': function (t, options) {
+        'card-buttons': function (t, options) {
             return [{
                 icon: './logo.png',
                 text: 'WMS Preview',
