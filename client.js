@@ -16,11 +16,11 @@ var attachMapPopup = function (t, opts) {
                 });
             }
 
-            var promise = $.ajax({
+            var jQueryPromise = $.ajax({
                 url: search,
                 dataType: "xml"
             });
-            return promise.then(
+            return jQueryPromise.then(
                 function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
@@ -31,7 +31,13 @@ var attachMapPopup = function (t, opts) {
                     }
                     console.log('fine', wmsCapabilities);
                     return new Promise(function (resolve) {
-                        resolve([]);
+                        resolve([{
+                            text: 'Result 1',
+                            callback: function (t, opts) { }
+                        }, {
+                            text: 'Result 2',
+                            callback: function (t, opts) { }
+                        }]);
                     });
                 },
                 function (error) {
