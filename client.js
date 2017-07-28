@@ -14,10 +14,10 @@ var enterGetCapabilitiesUrl = function (t) {
         title: 'WMS Preview',
         items: [{
             text: 'attach Map..',
-            callback: new AttachPopup().attachMap()
+            callback: new AttachPopup().attachMap
         }, {
             text: 'attach LegendGraphic..',
-            callback: new AttachPopup().attachLegendGraphic()
+            callback: new AttachPopup().attachLegendGraphic
         }]
     });
 };
