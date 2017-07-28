@@ -3,8 +3,19 @@ var attachMapPopup = function (t, opts) {
         title: 'Attach Map..',
         items: function (t, options) {
             var search = options.search;
+            if(!search || search.length === 0){
+                resolve([]);
+            }
+            if(search.trim().indexOf("https://") === -1){
+                resolve([{
+                    text: 'WMS GetCapabilities URL must start with https://',
+                    callback: function (t, opts) {
+                        console.log('Result 1')
+                    }
+                }]);
+            }
             return new Promise(function (resolve) {
-                // you'd probably be making a network request at this point
+
                 resolve([{
                     text: 'Result 1',
                     callback: function (t, opts) {
