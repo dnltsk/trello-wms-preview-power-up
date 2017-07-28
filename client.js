@@ -24,11 +24,11 @@ var enterGetCapabilitiesUrl = function (t) {
 
 
 attachMapPopup = function (t, opts) {
-    return this._attachGenericPopup(t, opts);
+    return this.attachGenericPopup(t, opts);
 };
 
 attachLegendGraphicPopup = function (t, opts) {
-    return this._attachGenericPopup(t, opts);
+    return this.attachGenericPopup(t, opts);
 };
 
 attachGenericPopup = function (t, opts) {
