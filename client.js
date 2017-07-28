@@ -13,10 +13,10 @@ var enterGetCapabilitiesUrl = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'attach Map..',
+            text: 'attach Maps..',
             callback: attachMapPopup
         }, {
-            text: 'attach LegendGraphic..',
+            text: 'attach LegendGraphics..',
             callback: attachLegendGraphicPopup
         }]
     });
@@ -24,17 +24,19 @@ var enterGetCapabilitiesUrl = function (t) {
 
 
 attachMapPopup = function (t, opts) {
-    return this.attachGenericPopup(t, opts);
+    return this.attachGenericPopup(t, opts, 'MAP');
 };
 
 attachLegendGraphicPopup = function (t, opts) {
-    return this.attachGenericPopup(t, opts);
+    return this.attachGenericPopup(t, opts, "LEGEND_GRAPHIC");
 };
 
-attachGenericPopup = function (t, opts) {
+attachGenericPopup = function (t, opts, attachmentMode) {
     console.log('attachGenericPopup');
     return t.popup({
-        title: 'Attach Map..',
+        title: function () {
+            return attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics.."
+        },
         items: function (t, options) {
             var search = options.search;
             if (!search || search.length === 0) {
@@ -67,14 +69,23 @@ attachGenericPopup = function (t, opts) {
                         return {
                             text: layer.title,
                             callback: function () {
-                                var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                console.log("GetMap URL: ", getMapUrl);
-                                t.attach({
-                                    name: 'GetMap: ' + layer.title,
-                                    url: getMapUrl
-                                });
+                                if (attachmentMode === "MAP") {
+                                    var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
+                                    console.log("GetMap URL: ", getMapUrl);
+                                    t.attach({
+                                        name: 'Map: ' + layer.title,
+                                        url: getMapUrl
+                                    });
+                                } else {
+                                    var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
+                                    console.log("GetLegendGraphic URL: ", getLegendGraphicUrl);
+                                    t.attach({
+                                        name: 'LegendGraphic: ' + layer.title,
+                                        url: getLegendGraphicUrl
+                                    });
+                                }
+                                }
                             }
-                        }
                             ;
                     });
                     return new Promise(function (resolve) {
