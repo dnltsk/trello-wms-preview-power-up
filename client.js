@@ -34,6 +34,11 @@ attachLegendGraphicPopup = function (t, opts) {
 attachGenericPopup = function (t, opts, attachmentMode) {
     console.log('attachGenericPopup');
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
+    var emptyMessage = 'No map layers found';
+    if(attachmentMode === 'LEGEND_GRAPHIC'){
+        emptyMessage = 'No legend graphics found';
+    }
+
     return t.popup({
         title: title,
         items: function (t, options) {
@@ -64,6 +69,11 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             resolve([]);
                         });
                     }
+                    if (wmsCapabilities.getLegendGraphic !== undefined) {
+                        return new Promise(function (resolve) {
+                            resolve([]);
+                        });
+                    }
                     var items = wmsCapabilities.layers.map(function (layer) {
                         return {
                             text: layer.title,
@@ -87,7 +97,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                         };
                     });
                     return new Promise(function (resolve) {
-                        resolve(items)
+                        resolve(items);
                     });
                 },
                 function (error) {
