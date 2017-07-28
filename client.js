@@ -24,14 +24,14 @@ var enterGetCapabilitiesUrl = function (t) {
 
 var AttachPopup = function () {
     this.attachMap = function (t, opts) {
-        return this.attachGenericPopup(t, opts);
+        return this._attachGenericPopup(t, opts);
     };
 
     this.attachLegendGraphic = function (t, opts) {
-        return this.attachGenericPopup(t, opts);
+        return this._attachGenericPopup(t, opts);
     };
 
-    this.attachGenericPopup = function (t, opts) {
+    this._attachGenericPopup = function (t, opts) {
         return t.popup({
             title: 'Attach Map..',
             items: function (t, options) {
