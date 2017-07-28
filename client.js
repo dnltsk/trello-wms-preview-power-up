@@ -5,14 +5,14 @@ var enterGetCapabilitiesUrl = function (t) {
             text: 'attach Map..',
             callback: function (t, opts) {
                 console.log('attach Map..', t, opts);
-            },
-            url: 'attachment-select-target.html'
+            }
+            //, url: 'attachment-select-target.html'
         }, {
             text: 'attach LegendGraphic..',
             callback: function (t, opts) {
                 console.log('attach LegendGraphic..', t, opts);
-            },
-            url: 'attachment-select-target.html'
+            }
+            //, url: 'attachment-select-target.html'
         }]
     });
 };
