@@ -16,17 +16,7 @@ var attachMapPopup = function (t, opts) {
             }
             return new Promise(function (resolve) {
 
-                resolve([{
-                    text: 'Result 1',
-                    callback: function (t, opts) {
-                        console.log('Result 1')
-                    }
-                }, {
-                    text: 'Result 2',
-                    callback: function (t, opts) {
-                        console.log('Result 2')
-                    }
-                }]);
+                resolve([]);
             });
         },
         search: {
