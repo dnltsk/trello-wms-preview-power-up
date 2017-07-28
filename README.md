@@ -13,6 +13,10 @@ Trello Power-Up to generate a card for every layer of a given Web Map Service (W
 
 ## samples
 
+* The General Bathymetric Chart of the Oceans (GEBCO) of the British Oceanographic Data Centre (BODC)<br>
+https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?request=getCapabilities&service=wms&version=1.3.0 
+=> legend graphic is a blank white image
+
 * IEM GOES Alaska VIS WMS Service of the Iowa State University<br>
 https://mesonet.agron.iastate.edu/cgi-bin/wms/goes/alaska_vis.cgi?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities<br>
 => legend graphic is a blank white image
