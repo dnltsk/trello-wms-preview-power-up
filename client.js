@@ -3,10 +3,22 @@ var enterGetCapabilitiesUrl = function (t) {
             title: 'WMS Preview',
             items: [{
                 text: 'attach Map..',
-                url: 'attachment-select-target.html'
+                callback: function (t, opts) {
+                    return t.popup({
+                        title: 'WMS Preview - attach Map..',
+                        url: 'enter-getcapabilities-url.html'
+                    })
+                }
+                //, url: 'attachment-select-target.html'
             }, {
                 text: 'attach LegendGraphic..',
-                url: 'attachment-select-target.html'
+                callback: function (t, opts) {
+                    return t.popup({
+                        title: 'WMS Preview - attach LegendGraphic..',
+                        url: 'enter-getcapabilities-url.html'
+                    })
+                }
+
             }]
         })
             ;
