@@ -33,7 +33,7 @@ var attachMapPopup = function (t, opts) {
                     });
                 },
                 error: function (error) {
-                    console.error('Unable to load GetCapabilities document: ', error);
+                    console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
                     return new Promise(function (resolve) {
                         resolve([]);
                     });
