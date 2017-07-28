@@ -4,15 +4,19 @@ var attachMapPopup = function (t, opts) {
         items: function (t, options) {
             var search = options.search;
             if(!search || search.length === 0){
-                resolve([]);
+                return new Promise(function (resolve) {
+                    resolve([]);
+                });
             }
             if(search.trim().indexOf("https://") === -1){
-                resolve([{
-                    text: 'WMS GetCapabilities URL must start with https://',
-                    callback: function (t, opts) {
-                        console.log('Result 1')
-                    }
-                }]);
+                return new Promise(function (resolve) {
+                    resolve([{
+                        text: 'WMS GetCapabilities URL must start with https://',
+                        callback: function (t, opts) {
+                            console.log('Result 1')
+                        }
+                    }]);
+                });
             }
             return new Promise(function (resolve) {
 
