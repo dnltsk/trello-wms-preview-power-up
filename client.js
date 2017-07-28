@@ -5,19 +5,14 @@ var attachMapPopup = function (t, opts) {
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
-                return new Promise(function (resolve) {
-                    resolve([]);
+                return new Promise(function (resolve, reject) {
+                    reject();
                 });
             }
             if (search.trim().indexOf("https://") === -1) {
                 //input does not start with https://
-                return new Promise(function (resolve) {
-                    resolve([{
-                        text: 'Error: WMS GetCapabilities URL must start with https://',
-                        callback: function (t, opts) {
-                            //do nothing
-                        }
-                    }]);
+                return new Promise(function (resolve, reject) {
+                    reject();
                 });
             }
 
@@ -29,20 +24,20 @@ var attachMapPopup = function (t, opts) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
                         console.error('The WMS Service must be in Version 1.3.0 but is ' + wmsCapabilities.version);
-                        return new Promise(function (resolve) {
-                            resolve();
+                        return new Promise(function (resolve, reject) {
+                            reject();
                         });
                     }
                     console.log('fine', wmsCapabilities);
-                    return new Promise(function (resolve) {
-                        resolve();
+                    return new Promise(function (resolve, reject) {
+                        reject();
                     });
                 }
             ).catch(
                 function (error) {
                     console.error('Unable to load GetCapabilities document: ', error);
-                    return new Promise(function (resolve) {
-                        resolve();
+                    return new Promise(function (resolve, reject) {
+                        reject();
                     });
                 }
             );
