@@ -30,20 +30,18 @@ var attachMapPopup = function (t, opts) {
 };
 
 var enterGetCapabilitiesUrl = function (t) {
-        return t.popup({
-            title: 'WMS Preview',
-            items: [{
-                text: 'attach Map..',
-                callback: attachMapPopup
-            }, {
-                text: 'attach LegendGraphic..',
-                callback: attachMapPopup
+    return t.popup({
+        title: 'WMS Preview',
+        items: [{
+            text: 'attach Map..',
+            callback: attachMapPopup
+        }, {
+            text: 'attach LegendGraphic..',
+            callback: attachMapPopup
 
-            }]
-        })
-            ;
-    }
-;
+        }]
+    });
+};
 
 TrelloPowerUp.initialize(
     {
