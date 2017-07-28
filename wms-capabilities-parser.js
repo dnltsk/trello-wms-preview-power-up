@@ -44,5 +44,4 @@ var GetCapabilitiesParser = function () {
         return layers;
     }
 
-
 };

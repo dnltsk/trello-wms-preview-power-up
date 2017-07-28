@@ -1,4 +1,3 @@
-
 function createGetMapUrl(wmsCapabilities, layer) {
     return [
         wmsCapabilities.getMap.resource,
