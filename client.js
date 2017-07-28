@@ -4,12 +4,12 @@ TrelloPowerUp.initialize(
             return [{
                 icon: './logo.png',
                 text: 'WMS Preview',
-                callback: enterGetCapabilitiesUrl
+                callback: selectTargetPopup
             }];
         }
     });
 
-var enterGetCapabilitiesUrl = function (t) {
+var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
