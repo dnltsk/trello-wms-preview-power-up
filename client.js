@@ -16,7 +16,7 @@ var enterGetCapabilitiesUrl = function (t) {
             text: 'attach Maps..',
             callback: attachMapPopup
         }, {
-            text: 'attach LegendGraphics..',
+            text: 'attach Legend Graphics..',
             callback: attachLegendGraphicPopup
         }]
     });
@@ -34,9 +34,11 @@ attachLegendGraphicPopup = function (t, opts) {
 attachGenericPopup = function (t, opts, attachmentMode) {
     console.log('attachGenericPopup');
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
-    var emptyMessage = 'No map layers found';
+    var emptyMessage = 'No Maps found';
+    var searchingMessage = 'Searching for Maps...'
     if (attachmentMode === 'LEGEND_GRAPHIC') {
-        emptyMessage = 'No legend graphics found';
+        emptyMessage = 'No Legend Graphics found';
+        searchingMessage = 'Searching for Legend Graphics...'
     }
 
     return t.popup({
@@ -114,8 +116,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
             // defaults to 300, override must be larger than 300
             debounce: 300,
             placeholder: 'Enter a WMS GetCapabilities URL',
-            empty: 'No Map Layers found',
-            searching: 'Searching for Map Layers...'
+            empty: emptyMessage,
+            searching: searchingMessage
         }
     })
 };
