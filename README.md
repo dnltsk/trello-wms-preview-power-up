@@ -2,7 +2,7 @@
 
 Trello Power-Up to attach maps and legend graphics of a given Web Map Service (WMS) to a card
 
-[![WMS Preview in action](meta-inf/demo.png)](https://vimeo.com/227490716)
+[![WMS Preview in action](https://github.com/dnltsk/trello-wms-preview-power-up/raw/gh-pages/meta-inf/demo.png)](https://vimeo.com/227490716)
 
 
 ## requirements
