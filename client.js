@@ -33,10 +33,9 @@ attachLegendGraphicPopup = function (t, opts) {
 
 attachGenericPopup = function (t, opts, attachmentMode) {
     console.log('attachGenericPopup');
+    var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
     return t.popup({
-        title: function () {
-            return attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics.."
-        },
+        title: title,
         items: function (t, options) {
             var search = options.search;
             if (!search || search.length === 0) {
