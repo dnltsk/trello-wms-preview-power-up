@@ -1,7 +1,8 @@
 var enterGetCapabilitiesUrl = function (t) {
     return t.popup({
         title: 'WMS Preview',
-        url: 'enter-getcapabilities-url.html',
+        //url: 'enter-getcapabilities-url.html',
+        url: 'attachment-select-target.html',
         callback: function (t) {
             return t.closePopup();
         }
