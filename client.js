@@ -35,7 +35,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
     console.log('attachGenericPopup');
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
     var emptyMessage = 'No map layers found';
-    if(attachmentMode === 'LEGEND_GRAPHIC'){
+    if (attachmentMode === 'LEGEND_GRAPHIC') {
         emptyMessage = 'No legend graphics found';
     }
 
@@ -69,7 +69,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             resolve([]);
                         });
                     }
-                    if (wmsCapabilities.getLegendGraphic === undefined) {
+                    if ((attachmentMode === "MAP" && wmsCapabilities.getMap === undefined)
+                        || (attachmentMode === "LEGEND_GRAPHIC" && wmsCapabilities.getLegendGraphic === undefined)) {
                         return new Promise(function (resolve) {
                             resolve([]);
                         });
