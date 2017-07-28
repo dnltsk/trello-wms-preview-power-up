@@ -69,7 +69,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             resolve([]);
                         });
                     }
-                    if (wmsCapabilities.getLegendGraphic !== undefined) {
+                    if (wmsCapabilities.getLegendGraphic === undefined) {
                         return new Promise(function (resolve) {
                             resolve([]);
                         });
