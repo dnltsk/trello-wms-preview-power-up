@@ -26,7 +26,8 @@ var attachMapPopup = function (t, opts) {
             empty: 'No Map Layers found',
             searching: 'Searching for Map Layers...'
         }
-    });
+    })
+};
 
 var enterGetCapabilitiesUrl = function (t) {
         return t.popup({
