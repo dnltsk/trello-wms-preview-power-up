@@ -32,7 +32,7 @@ attachLegendGraphicPopup = function (t, opts) {
 };
 
 attachGenericPopup = function (t, opts) {
-    console.log('_attachGenericPopup');
+    console.log('attachGenericPopup');
     return t.popup({
         title: 'Attach Map..',
         items: function (t, options) {
