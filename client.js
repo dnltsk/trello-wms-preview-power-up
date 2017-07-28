@@ -29,7 +29,6 @@ var attachMapPopup = function (t, opts) {
                             resolve([]);
                         });
                     }
-
                     var items = wmsCapabilities.layers.map(function (layer) {
                         return {
                             text: layer.title,
