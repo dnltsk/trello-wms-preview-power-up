@@ -33,9 +33,15 @@ var attachMapPopup = function (t, opts) {
                         return {
                             text: layer.title,
                             callback: function () {
-                                console.log("GetMap URL: ", createGetMapUrl(wmsCapabilities, layer))
+                                var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
+                                console.log("GetMap URL: ", getMapUrl);
+                                t.attach({
+                                    name: 'GetMap: ' + layer.title,
+                                    url: getMapUrl
+                                });
                             }
                         }
+                            ;
                     });
                     return new Promise(function (resolve) {
                         resolve(items)
