@@ -32,6 +32,7 @@ var AttachPopup = function () {
     };
 
     this._attachGenericPopup = function (t, opts) {
+        console.log('_attachGenericPopup');
         return t.popup({
             title: 'Attach Map..',
             items: function (t, options) {
