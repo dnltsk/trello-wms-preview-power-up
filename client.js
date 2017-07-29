@@ -90,16 +90,12 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getMapUrl
                                     });
                                     Trello.post(
-                                        '/1/cards/',
-                                        newList,
+                                        '/1/cards/' + t.getContext().card + '/actions/comments?text=Map attached: ' + layer.title + ' ' + getMapUrl,
                                         function (data) {
-                                            var idList = data.id;
-                                            createWmsCards(idList, wmsCapabilities, getCapabilitiesUrl);
-                                            callCounter--;
+                                            console.log('comment success', data);
                                         },
                                         function (error) {
-                                            console.error('cannot create list', error);
-                                            callCounter--;
+                                            console.log('comment error', data);
                                         });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
@@ -107,6 +103,14 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     });
+                                    Trello.post(
+                                        '/1/cards/' + t.getContext().card + '/actions/comments?text=Legend Graphic attached: ' + layer.title + ' ' + getLegendGraphicUrl,
+                                        function (data) {
+                                            console.log('comment success', data);
+                                        },
+                                        function (error) {
+                                            console.log('comment error', data);
+                                        });
                                 }
                             }
                         };
