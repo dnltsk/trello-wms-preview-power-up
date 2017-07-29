@@ -32,10 +32,9 @@ attachLegendGraphicPopup = function (t, opts) {
 };
 
 attachGenericPopup = function (t, opts, attachmentMode) {
-    console.log('attachGenericPopup');
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
     var emptyMessage = 'No Maps found';
-    var searchingMessage = 'Searching for Maps...'
+    var searchingMessage = 'Searching for Maps...';
     if (attachmentMode === 'LEGEND_GRAPHIC') {
         emptyMessage = 'No Legend Graphics found';
         searchingMessage = 'Searching for Legend Graphics...'
@@ -83,14 +82,12 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             callback: function () {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                    console.log("GetMap URL: ", getMapUrl);
                                     t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
-                                    console.log("GetLegendGraphic URL: ", getLegendGraphicUrl);
                                     t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
@@ -198,7 +195,6 @@ function createGetMapUrl(wmsCapabilities, layer) {
  *
  */
 function createGetLegendGraphicUrl(wmsCapabilities, layer) {
-    console.log('createGetLegendGraphicUrl', wmsCapabilities, layer);
     return [
         wmsCapabilities.getLegendGraphic.resource,
         'SERVICE=WMS',
