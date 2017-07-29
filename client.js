@@ -109,8 +109,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
 
         },
         search: {
-            // optional # of ms to debounce search to
-            // defaults to 300, override must be larger than 300
             debounce: 300,
             placeholder: 'Enter a WMS GetCapabilities URL',
             empty: emptyMessage,
