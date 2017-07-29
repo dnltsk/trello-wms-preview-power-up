@@ -43,9 +43,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
     return t.popup({
         title: title,
         items: function (t, options) {
-
-            console.log('context', t.getContext());
-
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
@@ -89,28 +86,12 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     });
-                                    // Trello.post(
-                                    //     '/1/cards/' + t.getContext().card + '/actions/comments?text=Map attached: ' + layer.title + ' ' + getMapUrl,
-                                    //     function (data) {
-                                    //         console.log('comment success', data);
-                                    //     },
-                                    //     function (error) {
-                                    //         console.log('comment error', data);
-                                    //     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     });
-                                    Trello.post(
-                                        '/1/cards/' + t.getContext().card + '/actions/comments?text=Legend Graphic attached: ' + layer.title + ' ' + getLegendGraphicUrl,
-                                        function (data) {
-                                            console.log('comment success', data);
-                                        },
-                                        function (error) {
-                                            console.log('comment error', data);
-                                        });
                                 }
                             }
                         };
