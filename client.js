@@ -89,14 +89,14 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     });
-                                    Trello.post(
-                                        '/1/cards/' + t.getContext().card + '/actions/comments?text=Map attached: ' + layer.title + ' ' + getMapUrl,
-                                        function (data) {
-                                            console.log('comment success', data);
-                                        },
-                                        function (error) {
-                                            console.log('comment error', data);
-                                        });
+                                    // Trello.post(
+                                    //     '/1/cards/' + t.getContext().card + '/actions/comments?text=Map attached: ' + layer.title + ' ' + getMapUrl,
+                                    //     function (data) {
+                                    //         console.log('comment success', data);
+                                    //     },
+                                    //     function (error) {
+                                    //         console.log('comment error', data);
+                                    //     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
