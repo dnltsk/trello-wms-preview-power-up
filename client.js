@@ -43,6 +43,9 @@ attachGenericPopup = function (t, opts, attachmentMode) {
     return t.popup({
         title: title,
         items: function (t, options) {
+
+            console.log('context', t.getContext());
+
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
@@ -86,6 +89,18 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     });
+                                    Trello.post(
+                                        '/1/cards/'+,
+                                        newList,
+                                        function (data) {
+                                            var idList = data.id;
+                                            createWmsCards(idList, wmsCapabilities, getCapabilitiesUrl);
+                                            callCounter--;
+                                        },
+                                        function (error) {
+                                            console.error('cannot create list', error);
+                                            callCounter--;
+                                        });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
