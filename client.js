@@ -90,7 +90,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getMapUrl
                                     });
                                     Trello.post(
-                                        '/1/cards/'+,
+                                        '/1/cards/',
                                         newList,
                                         function (data) {
                                             var idList = data.id;
