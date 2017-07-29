@@ -29,7 +29,6 @@ https://dnltsk.github.io/trello-wms-preview-power-up/test-data/sample-get-capabi
 
 ## references
 
+* Power-Up Client Library Documentation https://developers.trello.com/reference/#client-library
 * Power-Up Tutorial http://tech.trello.com/power-up-tutorial-part-one/
 * Power-Up Samples https://github.com/trello/power-up-template
-* Trello Client (required to create Lists, Cards, Attachments) https://developers.trello.com/get-started/start-building
-* Trello API https://developers.trello.com/advanced-reference
