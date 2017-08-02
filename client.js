@@ -85,17 +85,19 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                     t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
-                                    }).then(function(){
-                                        return t.closePopup();
-                                    });
+                                    })
+                                    //     .then(function(){
+                                    //     return t.closePopup();
+                                    // });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
-                                    }).then(function(){
-                                        return t.closePopup();
-                                    });
+                                    })
+                                    //     .then(function(){
+                                    //     return t.closePopup();
+                                    // });
                                 }
                             }
                         };
