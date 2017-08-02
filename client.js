@@ -86,7 +86,7 @@ attachGenericPopup = function (tMain, opts, attachmentMode) {
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     }).then(function(){
-                                        console.log('c close?', tMain);
+                                        console.log('c close?', tMain.closePopup);
                                         tMain.closePopup();
                                     });
                                 } else {
@@ -95,7 +95,7 @@ attachGenericPopup = function (tMain, opts, attachmentMode) {
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        console.log('c close?', tMain);
+                                        console.log('c close?', tMain.closePopup);
                                         tMain.closePopup();
                                     });
                                 }
