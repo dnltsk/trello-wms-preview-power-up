@@ -93,12 +93,13 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getLegendGraphicUrl
                                     });
                                 }
-                                t.closePopup();
                             }
                         };
                     });
                     return new Promise(function (resolve) {
                         resolve(items);
+                    }).then(function() {
+                        return t.closePopup();
                     });
                 },
                 function (error) {
