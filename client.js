@@ -85,12 +85,16 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                     t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
+                                    }).then(function(){
+                                        t.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
+                                    }).then(function(){
+                                        t.closePopup();
                                     });
                                 }
                             }
@@ -183,8 +187,8 @@ function createGetMapUrl(wmsCapabilities, layer) {
         'STYLES=',
         'CRS=EPSG:4326',
         'BBOX=-90,-180,90,180',
-        'width=1024',
-        'height=512',
+        'width=512',
+        'height=256',
         'format=' + wmsCapabilities.getMap.format
     ].join('&');
 }
@@ -202,8 +206,8 @@ function createGetLegendGraphicUrl(wmsCapabilities, layer) {
         'STYLE=',
         'CRS=EPSG:4326',
         'BBOX=-90,-180,90,180',
-        'width=1024',
-        'height=512',
+        'width=512',
+        'height=256',
         'format=' + wmsCapabilities.getLegendGraphic.format
     ].join('&');
 }
