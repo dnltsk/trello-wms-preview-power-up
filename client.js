@@ -85,12 +85,16 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                     t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
+                                    }).then(function(){
+                                        return t.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
                                     t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
+                                    }).then(function(){
+                                        return t.closePopup();
                                     });
                                 }
                             }
@@ -98,9 +102,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                     });
                     return new Promise(function (resolve) {
                         resolve(items);
-                    }).then(function() {
                         return t.closePopup();
-                    });
+                    })
                 },
                 function (error) {
                     console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
