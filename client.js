@@ -9,8 +9,8 @@ TrelloPowerUp.initialize(
         }
     });
 
-var selectTargetPopup = function (t) {
-    return t.popup({
+var selectTargetPopup = function (tMain) {
+    return tMain.popup({
         title: 'WMS Preview',
         items: [{
             text: 'attach Maps..',
@@ -23,15 +23,15 @@ var selectTargetPopup = function (t) {
 };
 
 
-attachMapPopup = function (t, opts) {
-    return this.attachGenericPopup(t, opts, 'MAP');
+attachMapPopup = function (tMain, opts) {
+    return this.attachGenericPopup(tMain, opts, 'MAP');
 };
 
-attachLegendGraphicPopup = function (t, opts) {
-    return this.attachGenericPopup(t, opts, "LEGEND_GRAPHIC");
+attachLegendGraphicPopup = function (tMain, opts) {
+    return this.attachGenericPopup(tMain, opts, "LEGEND_GRAPHIC");
 };
 
-attachGenericPopup = function (t, opts, attachmentMode) {
+attachGenericPopup = function (tMain, opts, attachmentMode) {
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
     var emptyMessage = 'No Maps found';
     var searchingMessage = 'Searching for Maps...';
@@ -40,9 +40,9 @@ attachGenericPopup = function (t, opts, attachmentMode) {
         searchingMessage = 'Searching for Legend Graphics...'
     }
 
-    return t.popup({
+    return tMain.popup({
         title: title,
-        items: function (t2, options) {
+        items: function (tItem, options) {
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
@@ -82,21 +82,21 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             callback: function () {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                    return t.attach({
+                                    tMain.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     }).then(function(){
-                                        console.log('a close?', t);
-                                        return t.closePopup();
+                                        console.log('c close?', t);
+                                        tMain.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
-                                    return t.attach({
+                                    tMain.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        console.log('a close?', t);
-                                        return t.closePopup();
+                                        console.log('c close?', t);
+                                        tMain.closePopup();
                                     });
                                 }
                             }
