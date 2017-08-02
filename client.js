@@ -93,6 +93,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getLegendGraphicUrl
                                     });
                                 }
+                                t.closePopup();
                             }
                         };
                     });
