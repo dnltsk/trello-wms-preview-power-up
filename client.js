@@ -42,7 +42,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
 
     return t.popup({
         title: title,
-        items: function (t, options) {
+        items: function (t2, options) {
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
@@ -86,7 +86,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     }).then(function(){
-                                        t.closePopup();
+                                        t2.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
@@ -94,7 +94,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        t.closePopup();
+                                        t2.closePopup();
                                     });
                                 }
                             }
