@@ -98,7 +98,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                     });
                     return new Promise(function (resolve) {
                         resolve(items);
-                    })
+                    });
                 },
                 function (error) {
                     console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
