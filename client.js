@@ -184,8 +184,8 @@ function createGetMapUrl(wmsCapabilities, layer) {
         'STYLES=',
         'CRS=EPSG:4326',
         'BBOX=-90,-180,90,180',
-        'width=1024',
-        'height=512',
+        'width=512',
+        'height=256',
         'format=' + wmsCapabilities.getMap.format
     ].join('&');
 }
