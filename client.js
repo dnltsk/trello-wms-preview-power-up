@@ -102,7 +102,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                     });
                     return new Promise(function (resolve) {
                         resolve(items);
-                        return t.closePopup();
                     })
                 },
                 function (error) {
