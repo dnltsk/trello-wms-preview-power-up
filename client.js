@@ -87,7 +87,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getMapUrl
                                     }).then(function(){
                                         console.log('close?', t);
-                                        t.closePopup();
+                                        return t.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
@@ -96,7 +96,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         url: getLegendGraphicUrl
                                     }).then(function(){
                                         console.log('close?', t);
-                                        t.closePopup();
+                                        return t.closePopup();
                                     });
                                 }
                             }
