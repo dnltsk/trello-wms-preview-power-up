@@ -82,20 +82,20 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             callback: function () {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                    t.attach({
+                                    return t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     }).then(function(){
-                                        console.log('close?', t);
+                                        console.log('a close?', t);
                                         return t.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
-                                    t.attach({
+                                    return t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        console.log('close?', t);
+                                        console.log('a close?', t);
                                         return t.closePopup();
                                     });
                                 }
