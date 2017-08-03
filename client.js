@@ -53,8 +53,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
             if (search.trim().indexOf("https://") === -1) {
                 //input does not start with https://
                 return new Promise(function (resolve, reject) {
-                    console.log("https a!");
-                    t.closePopup();
                     resolve([])
                 });
             }
@@ -87,8 +85,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                     return t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
-                                    }).then(function(){
-                                        console.log('c close?', t.closePopup);
+                                    }).then(() => {
+                                        console.log('d close?', t.closePopup);
                                         return t.closePopup();
                                     });
                                 } else {
