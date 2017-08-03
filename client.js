@@ -56,8 +56,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                     console.log("https!");
                     resolve([]);
                 }).then(function(){
-                    console.log("close");
-                    t.closePopup();
+                    console.log("close a");
+                    return t.closePopup();
                 });
             }
 
