@@ -1,6 +1,6 @@
 {
   "name": "WMS Preview",
-  "details":"Trello Power-Up to generate a card for every layer of a given Web Map Service (WMS)",
+  "details":"Trello Power-Up to attach Maps and Legend Graphics from a Web Map Service (WMS)",
   "icon": {
     "url": "./logo.png"
   },
