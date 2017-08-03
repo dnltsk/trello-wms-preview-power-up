@@ -47,15 +47,17 @@ attachGenericPopup = function (t, opts, attachmentMode) {
             if (!search || search.length === 0) {
                 //no input
                 return new Promise(function (resolve, reject) {
-                    console.log('no input');
                     resolve([])
                 });
             }
             if (search.trim().indexOf("https://") === -1) {
                 //input does not start with https://
                 return new Promise(function (resolve, reject) {
-                    console.log('https');
-                    reject('foo');
+                    console.log("https!");
+                    resolve([]);
+                }).then(function(){
+                    console.log("close");
+                    t.closePopup();
                 });
             }
 
