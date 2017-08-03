@@ -94,7 +94,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        console.log('c close?', t.closePopup);
                                         return t.closePopup();
                                     });
                                 }
