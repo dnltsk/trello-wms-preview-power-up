@@ -55,7 +55,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 //input does not start with https://
                 return new Promise(function (resolve, reject) {
                     console.log('https');
-                    resolve([]);
+                    reject('foo');
                 });
             }
 
