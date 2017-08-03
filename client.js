@@ -9,8 +9,8 @@ TrelloPowerUp.initialize(
         }
     });
 
-var selectTargetPopup = function (tMain) {
-    return tMain.popup({
+var selectTargetPopup = function (t) {
+    return t.popup({
         title: 'WMS Preview',
         items: [{
             text: 'attach Maps..',
@@ -23,15 +23,15 @@ var selectTargetPopup = function (tMain) {
 };
 
 
-attachMapPopup = function (tMain, opts) {
-    return this.attachGenericPopup(tMain, opts, 'MAP');
+attachMapPopup = function (t, opts) {
+    return this.attachGenericPopup(t, opts, 'MAP');
 };
 
-attachLegendGraphicPopup = function (tMain, opts) {
-    return this.attachGenericPopup(tMain, opts, "LEGEND_GRAPHIC");
+attachLegendGraphicPopup = function (t, opts) {
+    return this.attachGenericPopup(t, opts, "LEGEND_GRAPHIC");
 };
 
-attachGenericPopup = function (tMain, opts, attachmentMode) {
+attachGenericPopup = function (t, opts, attachmentMode) {
     var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
     var emptyMessage = 'No Maps found';
     var searchingMessage = 'Searching for Maps...';
@@ -40,19 +40,21 @@ attachGenericPopup = function (tMain, opts, attachmentMode) {
         searchingMessage = 'Searching for Legend Graphics...'
     }
 
-    return tMain.popup({
+    return t.popup({
         title: title,
         items: function (tItem, options) {
             var search = options.search;
             if (!search || search.length === 0) {
                 //no input
-                return new Promise(function (resolve) {
+                return new Promise(function (resolve, reject) {
+                    console.log('no input');
                     resolve([])
                 });
             }
             if (search.trim().indexOf("https://") === -1) {
                 //input does not start with https://
-                return new Promise(function (resolve) {
+                return new Promise(function (resolve, reject) {
+                    console.log('https');
                     resolve([]);
                 });
             }
@@ -72,7 +74,7 @@ attachGenericPopup = function (tMain, opts, attachmentMode) {
                     }
                     if ((attachmentMode === "MAP" && wmsCapabilities.getMap === undefined)
                         || (attachmentMode === "LEGEND_GRAPHIC" && wmsCapabilities.getLegendGraphic === undefined)) {
-                        return new Promise(function (resolve) {
+                        return new Promise(function (resolve, reject) {
                             resolve([]);
                         });
                     }
@@ -82,33 +84,33 @@ attachGenericPopup = function (tMain, opts, attachmentMode) {
                             callback: function () {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
-                                    return tMain.attach({
+                                    return t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
                                     }).then(function(){
-                                        console.log('c close?', tMain.closePopup);
-                                        return tMain.closePopup();
+                                        console.log('c close?', t.closePopup);
+                                        return t.closePopup();
                                     });
                                 } else {
                                     var getLegendGraphicUrl = createGetLegendGraphicUrl(wmsCapabilities, layer);
-                                    return tMain.attach({
+                                    return t.attach({
                                         name: 'LegendGraphic: ' + layer.title,
                                         url: getLegendGraphicUrl
                                     }).then(function(){
-                                        console.log('c close?', tMain.closePopup);
-                                        return tMain.closePopup();
+                                        console.log('c close?', t.closePopup);
+                                        return t.closePopup();
                                     });
                                 }
                             }
                         };
                     });
-                    return new Promise(function (resolve) {
+                    return new Promise(function (resolve, reject) {
                         resolve(items);
                     });
                 },
                 function (error) {
                     console.error('Unable to load GetCapabilities document: Does the resource contain CORS headers?');
-                    return new Promise(function (resolve) {
+                    return new Promise(function (resolve, reject) {
                         resolve([]);
                     });
                 })
