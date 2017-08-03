@@ -13,10 +13,10 @@ var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'attach Maps..',
+            text: 'Attach Map',
             callback: attachMapPopup
         }, {
-            text: 'attach Legend Graphics..',
+            text: 'Attach Legend Graphic',
             callback: attachLegendGraphicPopup
         }]
     });
@@ -85,8 +85,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                                     return t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
-                                    }).then(() => {
-                                        console.log('d close?', t.closePopup);
+                                    }).then(function(){
                                         return t.closePopup();
                                     });
                                 } else {
