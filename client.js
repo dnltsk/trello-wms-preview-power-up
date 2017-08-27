@@ -15,7 +15,7 @@ var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'Attach Map',
+            text: 'Attach Map a',
             callback: attachMapPopup
         }, {
             text: 'Attach Legend Graphic',
@@ -59,11 +59,10 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 });
             }
 
-            var jQueryPromise = $.ajax({
+            return Promise.resolve($.ajax({
                 url: search,
                 dataType: "xml"
-            });
-            return jQueryPromise.then(
+            })).then(
                 function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
