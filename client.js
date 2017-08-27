@@ -15,7 +15,7 @@ var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'Attach Map 2',
+            text: 'Attach Map 3',
             callback: attachMapPopup
         }, {
             text: 'Attach Legend Graphic',
@@ -84,6 +84,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                             callback: function () {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
+                                    console.log(getMapUrl);
                                     return t.attach({
                                         name: 'Map: ' + layer.title,
                                         url: getMapUrl
