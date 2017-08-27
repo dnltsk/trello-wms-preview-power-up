@@ -15,7 +15,7 @@ var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'Attach Map a',
+            text: 'Attach Map b',
             callback: attachMapPopup
         }, {
             text: 'Attach Legend Graphic',
@@ -59,9 +59,10 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 });
             }
 
-            return fetch(search)
-                .then(response => response.text())
-                .then(xmlString => $.parseXML(xmlString))
+            return $.ajax({
+                    url: search,
+                    dataType: "xml"
+                }))
                 .then(
                 function (xmlBody) {
                     console.log("xml", xmlBody);
