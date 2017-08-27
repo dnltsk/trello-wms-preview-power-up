@@ -59,10 +59,8 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 });
             }
 
-            return Promise.resolve($.ajax({
-                url: search,
-                dataType: "xml"
-            })).then(
+            return fetch(search)
+                .then(
                 function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
