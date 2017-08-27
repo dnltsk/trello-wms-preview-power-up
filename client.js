@@ -15,7 +15,7 @@ var selectTargetPopup = function (t) {
     return t.popup({
         title: 'WMS Preview',
         items: [{
-            text: 'Attach Map a',
+            text: 'Attach Map b',
             callback: attachMapPopup
         }, {
             text: 'Attach Legend Graphic',
