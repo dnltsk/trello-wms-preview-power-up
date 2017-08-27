@@ -1,3 +1,5 @@
+var Promise = TrelloPowerUp.Promise
+
 TrelloPowerUp.initialize(
     {
         'card-buttons': function (t, options) {
@@ -57,11 +59,11 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 });
             }
 
-            var jQueryPromise = $.ajax({
-                url: search,
-                dataType: "xml"
-            });
-            return jQueryPromise.then(
+            return $.ajax({
+                    url: search,
+                    dataType: "xml"
+                })
+                .then(
                 function (xmlBody) {
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
@@ -79,7 +81,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                     var items = wmsCapabilities.layers.map(function (layer) {
                         return {
                             text: layer.title,
-                            callback: function () {
+                            callback: function (t) {
                                 if (attachmentMode === "MAP") {
                                     var getMapUrl = createGetMapUrl(wmsCapabilities, layer);
                                     return t.attach({
