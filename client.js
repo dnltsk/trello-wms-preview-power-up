@@ -62,7 +62,7 @@ attachGenericPopup = function (t, opts, attachmentMode) {
             return $.ajax({
                     url: search,
                     dataType: "xml"
-                }))
+                })
                 .then(
                 function (xmlBody) {
                     console.log("xml", xmlBody);
