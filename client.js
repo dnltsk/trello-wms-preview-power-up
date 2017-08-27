@@ -65,7 +65,6 @@ attachGenericPopup = function (t, opts, attachmentMode) {
                 })
                 .then(
                 function (xmlBody) {
-                    console.log("xml", xmlBody);
                     var wmsCapabilities = new GetCapabilitiesParser().parse(xmlBody);
                     if (wmsCapabilities.version !== '1.3.0') {
                         console.error('The WMS Service must be in Version 1.3.0 but is ' + wmsCapabilities.version);
