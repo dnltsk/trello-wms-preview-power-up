@@ -4,7 +4,7 @@ TrelloPowerUp.initialize(
     {
         'card-buttons': function (t, options) {
             return [{
-                icon: './logo.png',
+                icon: './logo-gray.png',
                 text: 'WMS Preview',
                 callback: selectTargetPopup
             }];
