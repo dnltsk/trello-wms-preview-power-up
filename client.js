@@ -34,7 +34,7 @@ attachLegendGraphicPopup = function (t, opts) {
 };
 
 attachGenericPopup = function (t, opts, attachmentMode) {
-    var title = attachmentMode === "MAP" ? 'Attach Maps..' : "Attach LegendGraphics..";
+    var title = attachmentMode === "MAP" ? 'Attach Map..' : "Attach Legend Graphic..";
     var emptyMessage = 'No Maps found';
     var searchingMessage = 'Searching for Maps...';
     if (attachmentMode === 'LEGEND_GRAPHIC') {
